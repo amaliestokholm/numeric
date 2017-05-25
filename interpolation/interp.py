@@ -27,14 +27,15 @@ class interpolation:
         n = int(len(self.x))
         i = 0
         j = n-1
-        while j-i > 1:
+        while j - i > 1:
             m = int(np.floor((i+j) / 2))
             # Binary search
             if z > self.x[m]:
                 i = m
             else:
                 j = m
-        p = self.y[i] + (z - self.x[i]) * (self.y[i+1] - self.y[i]) / (self.x[i+1] - self.x[i])
+        # Calculate slope
+        p = (self.y[i+1] - self.y[i]) / (self.x [i+1] - self.x[i])
         return p, i
 
     
@@ -45,8 +46,8 @@ class interpolation:
         result = 0
         p, i = self.__binarysearch(z)
         for j in np.arange(i):
-            deltax = self.x[j + 1] - self.x[j]
-            result = result + self.y[j] * deltax + 0.5 * (self.y[j + 1] - self.y[j]) * deltax ** 2
+            deltax = self.x[j+1] - self.x[j]
+            result = result + self.y[j] * deltax + 0.5 * (self.y[j+1] - self.y[j]) * deltax ** 2
         result = (result +
                   self.y[i] * (z - self.x[i]) + 0.5 * (self.y[i+1] - self.y[i]) * (z - self.x[i]) ** 2)  
         return result
