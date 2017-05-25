@@ -16,11 +16,11 @@ z = np.linspace(start, end, N)
 i_cos = interp(x, y)
 
 # Interpolate
-s_lin, s_linint = i_cos.linterp(z)
+s_qspl, s_qsplint, s_qspldev = i_cos.qspline(z)
 
 # Print the values in order to save the stdout
-for i in np.arange(0, N):
+for i in np.arange(N):
     if i < n:
-        print('%s\t%s\t%s\t%s\t%s' % (z[i], s_lin[i], s_linint[i], x[i], y[i]))
+        print('%s\t%s\t%s\t%s\t%s\t%s' % (z[i], s_qspl[i], s_qsplint[i], s_qspldev[i], x[i], y[i]))
     else:
-        print('%s\t%s\t%s' % (z[i], s_lin[i], s_linint[i]))
+        print('%s\t%s\t%s\t%s' % (z[i], s_qspl[i], s_qsplint[i], s_qspldev[i]))
