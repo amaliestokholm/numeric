@@ -3,9 +3,9 @@ from interp import interpolation as interp
 
 # Define start and end point and the number of points in the function (n) and in the interpolation (N)
 n = 20
-N = 500
+N = 100
 start = 0
-end = 15 #2 * np.pi
+end = 4 * np.pi
 
 # Make input -- as an example, the cosine function is used.
 x = np.linspace(start, end, n)
