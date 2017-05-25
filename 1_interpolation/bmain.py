@@ -2,7 +2,7 @@ import numpy as np
 from interp import interpolation as interp
 
 # Define start and end point and the number of points in the function (n) and in the interpolation (N)
-n = 20
+n = 50
 N = 100
 start = 0
 end = 4 * np.pi
@@ -11,6 +11,8 @@ end = 4 * np.pi
 x = np.linspace(start, end, n)
 y = np.cos(x)
 z = np.linspace(start, end, N)
+y_dev = - np.sin(x)
+y_int = np.sin(x)
 
 # Initialize the class
 i_cos = interp(x, y)
@@ -21,6 +23,7 @@ s_qspl, s_qsplint, s_qspldev = i_cos.qspline(z)
 # Print the values in order to save the stdout
 for i in np.arange(N):
     if i < n:
-        print('%s\t%s\t%s\t%s\t%s\t%s' % (z[i], s_qspl[i], s_qsplint[i], s_qspldev[i], x[i], y[i]))
+        print('%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s'
+              % (z[i], s_qspl[i], s_qsplint[i], s_qspldev[i], x[i], y[i], y_int[i], y_dev[i]))
     else:
         print('%s\t%s\t%s\t%s' % (z[i], s_qspl[i], s_qsplint[i], s_qspldev[i]))

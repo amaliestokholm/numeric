@@ -13,12 +13,16 @@ a_plot.$(FORMAT) : a_out.txt
 	set output "$@"; \
 	set title "Test of linear interpolation"; \
 	set tics out; \
+	set key above ; \
+	set xrange [0:12]; \
+	set yrange [-1.2:1.2]; \
 	set xlabel "x"; \
 	set ylabel "cos(x)"; \
 	plot \
 	"$<" using 1:2  with lines title "Linear interpolation" \
 	, "$<" using 1:3 with lines title "Integral" \
-	, "$<" using 4:5 with points title "Data" \
+	, "$<" using 4:5 with points title "Data, cos(x)" \
+	, "$<" using 4:6 with points title "sin(x)" \
 	' | tee $(SCRIPT) | $(PLOTTER)
 
 b_plot.$(FORMAT) : b_out.txt 
@@ -28,13 +32,18 @@ b_plot.$(FORMAT) : b_out.txt
 	set output "$@"; \
 	set title "Test of quadratic interpolation"; \
 	set tics out; \
+	set key above ; \
+	set xrange [0:12]; \
+	set yrange [-1.2:1.2]; \
 	set xlabel "x"; \
 	set ylabel "cos(x)"; \
 	plot \
 	"$<" using 1:2  with lines  title "Quadratic interpolation" \
 	, "$<" using 1:3 with lines title "Integral" \
 	, "$<" using 1:4 with lines title "Derivative" \
-	, "$<" using 5:6 with points title "Data" \
+	, "$<" using 5:6 with points title "Data, cos(x)" \
+	, "$<" using 5:7 with points title "sin(x)" \
+	, "$<" using 5:8 with points title "-sin(x)" \
 	' | tee $(SCRIPT) | $(PLOTTER)
 
 
