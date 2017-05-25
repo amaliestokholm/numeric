@@ -113,7 +113,7 @@ class interpolation:
         return s, si
 
 
-    def qspline(self, z):
+    def qspline(self, z, deriv_flag=1, int_flag=1, func_flag=1):
         """
         Quadratic spline interpolation routine
         """
@@ -122,10 +122,13 @@ class interpolation:
         si = np.zeros(z.shape)
         sd = np.zeros(z.shape)
         b, c = self.__qspline_params()
-        for j in np.arange(z.size):  # remove this loop and just use the arrays when it works
+        for j in np.arange(z.size):
             p, i = self.__binarysearch(z[j])
-            s[j] = self.y[i] + b[i] * (z[j] - self.x[i]) + c[i] * (z[j] - self.x[i]) ** 2 
-            si[j] = self.__qspline_integ(z[j])
-            sd[j] = b[i] + 2 * c[i] * (z[j] - self.x[i])
+            if func_flag is not None:
+                s[j] = self.y[i] + b[i] * (z[j] - self.x[i]) + c[i] * (z[j] - self.x[i]) ** 2 
+            if int_flag is not None:
+                si[j] = self.__qspline_integ(z[j])
+            if deriv_flag is not None:
+                sd[j] = b[i] + 2 * c[i] * (z[j] - self.x[i])
         return s, si, sd
 
