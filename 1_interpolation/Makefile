@@ -77,5 +77,5 @@ c_out.txt : cmain.py
 	python3 $< > $@
 
 clean : 
-	rm -f *.txt a_plot.$(FORMAT) b_plot.$(FORMAT) 
+	rm -f *.txt a_plot.$(FORMAT) b_plot.$(FORMAT) c_plot.$(FORMAT) 
 	@echo "cleaned up"

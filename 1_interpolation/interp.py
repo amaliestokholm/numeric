@@ -21,8 +21,11 @@ class interpolation:
         
         self.n = int(len(self.x))
 
+        self.qb, self.qc = self.qspline_params()
+        self.cb, self.cc, self.cd = self.cspline_params()
 
-    def __binarysearch(self, z):
+
+    def binarysearch(self, z):
         """
         Binary search algorithm
         """
@@ -40,7 +43,7 @@ class interpolation:
         return p, i
 
 
-    def __qspline_params(self):
+    def qspline_params(self):
         """
         Calculate the coefficients b and c
         """
@@ -70,7 +73,7 @@ class interpolation:
         return b, c
 
 
-    def __cspline_params(self):
+    def cspline_params(self):
         """
         Calculate the coefficients b, c, and d for cubic spline
         """
@@ -123,12 +126,12 @@ class interpolation:
 
 
 
-    def __linterp_integ(self, z):
+    def linterp_integ(self, z):
         """
         Linear interpolation integral
         """
         result = 0
-        p, i = self.__binarysearch(z)
+        p, i = self.binarysearch(z)
         for j in np.arange(i):
             dx = self.x[j+1] - self.x[j]
             result = result + self.y[j] * dx + 0.5 * (self.y[j+1] - self.y[j]) * dx ** 2
@@ -137,13 +140,14 @@ class interpolation:
         return result
     
 
-    def __qspline_integ(self, z):
+    def qspline_integ(self, z):
         """
         Quadratic interpolation integral
         """
         result = 0
-        p, i = self.__binarysearch(z)
-        b, c = self.__qspline_params()
+        p, i = self.binarysearch(z)
+        b = self.qb
+        c = self.qc
         for j in np.arange(i):
             dx = self.x[j+1] - self.x[j]
             result += (self.y[j] * dx + 0.5 * b[j] * dx ** 2 + (1 / 3) * c[j] * dx ** 2)
@@ -152,13 +156,15 @@ class interpolation:
         return result
 
 
-    def __cspline_integ(self, x):
+    def cspline_integ(self, x):
         """
         Cubic spline integral
         """
         result = 0
-        p, i = self.__binarysearch(z)
-        b, c = self.__qspline_params()
+        p, i = self.binarysearch(z)
+        b = self.cb
+        c = self.cc
+        d = self.cd
         for j in np.arange(i):
             dx = self.x[j+1] - self.x[j]
             result += (self.y[j] * dx + 0.5 * b[j] * dx ** 2 + (1 / 3) * c[j] * dx ** 2 
@@ -175,9 +181,9 @@ class interpolation:
         s = np.zeros(z.shape)
         si = np.zeros(z.shape)
         for j in np.arange(z.size):
-            p, i = self.__binarysearch(z[j])
+            p, i = self.binarysearch(z[j])
             s[j] = self.y[i] + p * (z[j] - self.x[i])
-            si[j] = self.__linterp_integ(z[j])
+            si[j] = self.linterp_integ(z[j])
         return s, si
 
 
@@ -189,13 +195,14 @@ class interpolation:
         s = np.zeros(z.shape)
         si = np.zeros(z.shape)
         sd = np.zeros(z.shape)
-        b, c = self.__qspline_params()
+        b = self.qb
+        c = self.qc
         for j in np.arange(z.size):
-            p, i = self.__binarysearch(z[j])
+            p, i = self.binarysearch(z[j])
             if func_flag is not None:
                 s[j] = self.y[i] + b[i] * (z[j] - self.x[i]) + c[i] * (z[j] - self.x[i]) ** 2 
             if int_flag is not None:
-                si[j] = self.__qspline_integ(z[j])
+                si[j] = self.qspline_integ(z[j])
             if deriv_flag is not None:
                 sd[j] = b[i] + 2 * c[i] * (z[j] - self.x[i])
         return s, si, sd
@@ -209,14 +216,16 @@ class interpolation:
         s = np.zeros(z.shape)
         si = np.zeros(z.shape)
         sd = np.zeros(z.shape)
-        b, c, d = self.__cspline_params()
+        b = self.cb
+        c = self.cc
+        d = self.cd
         for j in np.arange(z.size):
-            p, i = self.__binarysearch(z[j])
+            p, i = self.binarysearch(z[j])
             if func_flag is not None:
                 s[j] = (self.y[i] + b[i] * (z[j] - self.x[i]) + c[i] * (z[j] - self.x[i]) ** 2 
                         + d[i] * (z[j] - self.x[i]) ** 3) 
             if int_flag is not None:
-                si[j] = self.__qspline_integ(z[j])
+                si[j] = self.qspline_integ(z[j])
             if deriv_flag is not None:
                 sd[j] = b[i] + 2 * c[i] * (z[j] - self.x[i]) + 3 * d[i] * (z[j] - self.x[i]) ** 2
         return s, si, sd
