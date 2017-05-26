@@ -43,3 +43,14 @@ def qr_gs_solve(Q, R, b):
     b[:] = np.dot(Q.T, b)
     backsubstitution(R, b)
 
+
+def qr_gs_inverse(Q, R, b):
+    """
+    This function calculates the inverse of the matrix Q into the matrix b
+    """
+    n, m = Q.shape
+    assert n == m
+    eye = np.identity(m)
+    for i in np.arange(m):
+        b[:, i] = eye[:, i]
+        qr_gs_solve(Q, R, b[:, i])
