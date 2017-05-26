@@ -4,6 +4,7 @@ from lineqsolver import qr_gs_decomp, qr_gs_solve, qr_gs_inverse, qr_gv_decomp, 
 """
 CHECKS
 """
+np.random.seed(11)
 
 print('Check part A.1')
 # Define dimensions of matrices - for tall matrix n > m
@@ -26,7 +27,7 @@ print('Q^T * Q =\n {}*\n{} \n= {}'.format(A.T, A, np.dot(A.T, A)))
 print('Due to numerical errors, the off-diagonal elements are probably not exactly 0, but close')
 print('We check if R is upper triangular:\n{}'.format(R))
 QR = np.dot(A, R)
-print('Are QR equal to A within a tolerance of {}? \n{}'.format(A, R, QR, rtol, np.allclose(QR, A_check, rtol)))
+print('Are QR equal to A within a tolerance of {}? \n{}'.format(rtol, np.allclose(QR, A_check, rtol)))
 
 
 print('\nCheck part A.2')
