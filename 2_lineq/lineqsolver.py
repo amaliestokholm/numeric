@@ -1,9 +1,18 @@
 import numpy as np
 
-# Define dimensions of matrices
-n = 3
-m = 3
-assert n >= m
+
+def backsubstitution(R, b):
+    """
+    This function performs an in-place back-substitution
+    """
+    n = len(R[:, 0])
+    list = np.arange(n)
+    for i in list[::-1]:
+        # b is substituted for the solution to the system
+        b[i] /= R[i, i]
+        for j in np.arange(i+1, n):
+            b[i] -= b[j] * R[i, j] / R[i, i]
+
 
 def qr_gs_decomp(A, R):
     """
@@ -16,18 +25,18 @@ def qr_gs_decomp(A, R):
     assert p == q
     assert m == p
 
-    Q = np.zeros((m, m),)
-
     # Gram-Schmidt orthogonalization
     for i in np.arange(m):
         R[i, i] = np.sqrt(np.dot(A[:, i], A[:, i]))
-        Q[:, i] = A[:, i] / R[i, i]
+        # A is substituted for Q with orthogonalized vectors.
+        A[:, i] /= R[i, i]
         for j in np.arange(i+1, m):
-            R[i, j] = np.dot(Q[:, i], A[:, j])
-            A[:, j] = A[:, j] - Q[:, i] * R[i, j]
+            R[i, j] = np.dot(A[:, i], A[:, j])
+            A[:, j] -= A[:, i] * R[i, j]
 
 
-A = np.random.rand(n, m)
-R = np.random.rand(m, m)
+def qr_gs_solve(Q, R, b):
+    """
+    This function solves the triangular system QR*x = b
+    """
 
-qr_gs_decomp(A, R)
