@@ -38,6 +38,8 @@ def qr_gs_decomp(A, R):
 
 def qr_gs_solve(Q, R, b):
     """
-    This function solves the triangular system QR*x = b
+    This function solves the triangular system QR*x = b by substituting b with Q^Tb and doing back-substitution. b is substited with the solution x.
     """
-    
+    b[:] = np.dot(Q.T, b)
+    backsubstitution(R, b)
+
