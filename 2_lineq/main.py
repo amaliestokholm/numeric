@@ -10,7 +10,7 @@ n = 5
 m = 3
 
 # Relative tolerance
-rtol = 1e-04
+rtol = 1e-16
 
 A = np.random.rand(n, m)
 A_check = A.copy() 
@@ -26,5 +26,5 @@ print('Due to numerical errors, the off-diagonal elements are probably not exact
 print('We check if R is upper triangular:\n{}'.format(R))
 print('We check if the product QR is equal to A:')
 QR = np.dot(A, R)
-print('Q * R \n= {}*\n{} \n= {},\nis it equal to A within a tolerance of {}? \n{}'.format(A, R, QR, rtol, np.allclose(QR, A_check, rtol)))
+print('Q * R \n= {}*\n{} \n= {},\nAre QR equal to A within a tolerance of {}? \n{}'.format(A, R, QR, rtol, np.allclose(QR, A_check, rtol)))
 

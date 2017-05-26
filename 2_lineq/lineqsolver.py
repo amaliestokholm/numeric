@@ -33,10 +33,11 @@ def qr_gs_decomp(A, R):
         for j in np.arange(i+1, m):
             R[i, j] = np.dot(A[:, i], A[:, j])
             A[:, j] -= A[:, i] * R[i, j]
+            R[j, i] = 0
 
 
 def qr_gs_solve(Q, R, b):
     """
     This function solves the triangular system QR*x = b
     """
-
+    
