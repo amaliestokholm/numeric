@@ -95,6 +95,6 @@ def qr_gv_inverse(A, b):
     """
     n, m = A.shape
     assert n == m
-    b = np.identity(m)
+    b[:] = np.identity(m)
     for i in np.arange(m):
-        b[:, i] = qr_gv_solve(A, b[:, i])
+        qr_gv_solve(A, b[:, i])
