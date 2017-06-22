@@ -33,16 +33,61 @@ def jacobi_diag(A):
     while change:
         rotations_counter += 1
         change = False
-        for p in range(n-1):
+        for p in range(n - 1):
             for q in range(p + 1, n):
                 change, rotations_counter = rotation(A, e, V, p, q, n,
-                                                     change, rotations_counter)
+                                                     change,
+                                                     rotations_counter, False)
     return rotations_counter, e, V
 
 
-def rotation(A, e, V, p, q, n, change, rotations_counter):
+def jacobi_eliminate(A):
     """
-    This routine performs a Jacobi rotation
+    This routine performs matrix diagonalization on a real and symmetric
+    matrix A using the Jacobi eigenvalue-by-eigenvalue method..
+    Arguments:
+        - 'A': The real, symmetric input matrix to be diagonalized.
+               The upper triangle is destroyed.
+    Returns:
+        - 'rotations_counter': The number of rotations used.
+        - 'e': Vector containing the eigenvalues.
+        - 'V': Matrix containing the eigenvectors.
+    """
+    # Check if A is quadratic, symmetric and real
+    A = np.asarray(A)
+    n, m = A.shape
+    assert n == m
+    assert np.allclose(A.T, A)
+    assert np.allclose(A, A.real)
+
+    # Initialization
+    e = np.zeros((n, 1))
+    V = np.identity(n)
+    rotations_counter = 0
+
+    # Store all diagonal elements in e
+    for i in range(n):
+        e[i] = A[i, i]
+
+    # Sweep row-by-row
+    for p in range(n - 1):
+        change = True
+        while change:
+            change = False
+            for q in range(p + 1, n):
+                change, rotations_counter = rotation(A, e, V, p, q, n,
+                                                     change, rotations_counter,
+                                                     True)
+    return rotations_counter, e, V
+
+
+def rotation(A, e, V, p, q, n, change, rotations_counter, pre_rows):
+    """
+    This routine performs a Jacobi rotation.
+    New arguments:
+        - 'pre_rows': Whether previous rows are eliminated or not.
+                      It can reduce the number of iterations in the
+                      non-cyclic method.
     """
 
     # Get the different entries
@@ -69,12 +114,14 @@ def rotation(A, e, V, p, q, n, change, rotations_counter):
         e[q] = aqq_n
         A[p, q] = 0
 
-        # Update remaining elements
-        for i in range(p):
-            aip = A[i, p]
-            aiq = A[i, q]
-            A[i, p] = c * aip - s * aiq
-            A[i, q] = c * aiq + s * aip
+        # Update remaining elements. The first loop does not affect the result
+        # if it eliminates eigenvalue by eigenvalue.
+        if not pre_rows:
+            for i in range(p):
+                aip = A[i, p]
+                aiq = A[i, q]
+                A[i, p] = c * aip - s * aiq
+                A[i, q] = c * aiq + s * aip
 
         for i in range(p + 1, q):
             api = A[p, i]
