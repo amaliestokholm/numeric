@@ -1,0 +1,27 @@
+Testing Jacobi diagonalization
+A = 
+ [[1 1]
+ [1 0]]
+
+Number of rotations used = 3
+
+Eigenvalues of A are:
+e =
+ [[-0.61803399]
+ [ 1.61803399]]
+
+Eigenvectors of A are:
+V =
+ [[ 0.52573111  0.85065081]
+ [-0.85065081  0.52573111]]
+
+A after the diagonalization is:
+A =
+ [[1 0]
+ [1 0]]
+
+Are V.T A V = e?
+True
+
+Are the eigenvalues identical to the ones found using np.linalg?
+True

@@ -1,6 +1,6 @@
 .PHONY: clean
 
-all : check  # output_a.txt output_b.txt
+all : check 
 
 output_a.txt : a.py
 	@echo '(a) What is your name?';

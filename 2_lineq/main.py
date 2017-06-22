@@ -4,6 +4,7 @@ from lineqsolver import qr_gs_decomp, qr_gs_solve, qr_gs_inverse, qr_gv_decomp, 
 """
 CHECKS
 """
+# Use the same random seed everytime
 np.random.seed(11)
 
 print('Check part A.1')

@@ -1,5 +1,3 @@
-ECHO = /bin/echo
-
 .PHONY: all check.txt clean 
 
 all : check.txt
