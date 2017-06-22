@@ -1,24 +1,61 @@
-Testing Jacobi diagonalization
+Testing Jacobi diagonalization using the cyclic method
 A = 
- [[1 1]
- [1 0]]
+ [[ 1.83374716  1.37174729  0.99299923]
+ [ 1.37174729  1.83600213  1.08783544]
+ [ 0.99299923  1.08783544  1.8235268 ]]
 
-Number of rotations used = 3
+Number of rotations used = 12
 
 Eigenvalues of A are:
 e =
- [[-0.61803399]
- [ 1.61803399]]
+ [[ 0.45552628]
+ [ 0.89652093]
+ [ 4.14122887]]
 
 Eigenvectors of A are:
 V =
- [[ 0.52573111  0.85065081]
- [-0.85065081  0.52573111]]
+ [[ 0.65864336  0.46731271  0.58975229]
+ [-0.74385765  0.28623383  0.60394204]
+ [ 0.11342274 -0.83647417  0.53614014]]
 
 A after the diagonalization is:
 A =
- [[1 0]
- [1 0]]
+ [[  1.83374716e+00   1.06289906e-18   0.00000000e+00]
+ [  1.37174729e+00   1.83600213e+00   2.77292984e-11]
+ [  9.92999233e-01   1.08783544e+00   1.82352680e+00]]
+
+Are V.T A V = e?
+True
+
+Are the eigenvalues identical to the ones found using np.linalg?
+True
+
+
+Testing Jacobi diagonalization eigenvalue-by-eigenvalue
+A = 
+ [[ 1.83374716  1.37174729  0.99299923]
+ [ 1.37174729  1.83600213  1.08783544]
+ [ 0.99299923  1.08783544  1.8235268 ]]
+
+Number of rotations used = 59
+
+Eigenvalues of A are:
+e =
+ [[ 0.45552628]
+ [ 0.89652093]
+ [ 4.14122887]]
+
+Eigenvectors of A are:
+V =
+ [[ 0.65864337  0.4673127   0.58975228]
+ [-0.74385765  0.28623384  0.60394204]
+ [ 0.11342273 -0.83647417  0.53614014]]
+
+A after the diagonalization is:
+A =
+ [[  1.83374716e+00   1.05793808e-08   0.00000000e+00]
+ [  1.37174729e+00   1.83600213e+00   0.00000000e+00]
+ [  9.92999233e-01   1.08783544e+00   1.82352680e+00]]
 
 Are V.T A V = e?
 True
