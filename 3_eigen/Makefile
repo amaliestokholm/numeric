@@ -1,8 +1,8 @@
-.PHONY: all acheck.txt clean 
+.PHONY: all check.txt clean 
 
-all : acheck.txt
+all : check.txt
 
-acheck.txt : amain.py
+check.txt : main.py
 	python3 $< > $@
 
 clean : 

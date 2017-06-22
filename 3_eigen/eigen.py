@@ -96,7 +96,15 @@ def rotation(A, e, V, p, q, n, change, rotations_counter, pre_rows):
     apq = A[p, q]
 
     # Calculate different terms
-    phi = 0.5 * np.arctan2((2 * apq), (aqq - app))
+    """
+    The smallest eigenvalue is found first in this implementation as the
+    it is the one we compare to the others. If the first element given to
+    arctan2 is 0, then it will return 0 (pi), if the next element
+    is positive(negative) and the routine will make no (many) rotations.
+    We can find the largest eigenvalue first by adding pi/2.
+    """
+    # phi = 0.5 * np.arctan2((2 * apq), (aqq - app))  # smallest first
+    phi = 0.5 * (np.pi + np.arctan2((2 * apq), (aqq - app)))  # greatest first
     c = np.cos(phi)
     s = np.sin(phi)
 

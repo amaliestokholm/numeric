@@ -25,8 +25,8 @@ def amain():
     e_check = np.dot(np.dot(np.transpose(V), A_copy), V)
 
     # Sort and flatten arrays, so the check is made easier
-    e_check = np.ravel(np.sort(np.diagonal(e_check)))
-    e = np.ravel(np.sort(e))
+    e_check = np.sort(np.ravel((np.diagonal(e_check))))
+    e = np.sort(np.ravel((e)))
     print(np.allclose(e_check, e))
 
     print('\nAre the eigenvalues identical to the ones found using np.linalg?')
@@ -60,8 +60,8 @@ def bmain():
     e_check = np.dot(np.dot(np.transpose(V), A_copy), V)
 
     # Sort and flatten arrays, so the check is made easier
-    e_check = np.ravel(np.sort(np.diagonal(e_check)))
-    e = np.ravel(np.sort(e))
+    e_check = np.sort(np.ravel(np.diagonal(e_check)))
+    e = np.sort(np.ravel(e))
     print(np.allclose(e_check, e))
 
     print('\nAre the eigenvalues identical to the ones found using np.linalg?')
