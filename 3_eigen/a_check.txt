@@ -1,0 +1,34 @@
+Testing Jacobi diagonalization using the cyclic method
+A = 
+ [[ 1.83374716  1.37174729  0.99299923]
+ [ 1.37174729  1.83600213  1.08783544]
+ [ 0.99299923  1.08783544  1.8235268 ]]
+
+Number of rotations used = 12
+
+Eigenvalues of A are:
+e =
+ [[ 3.18424897]
+ [ 1.83600213]
+ [ 1.8235268 ]]
+
+Eigenvectors of A are:
+V =
+ [[ 0.78084079 -0.60537557  0.15429869]
+ [ 0.47500603  0.41488639 -0.77604031]
+ [ 0.40577942  0.67925673  0.61151726]]
+
+A after the diagonalization is:
+A =
+ [[  1.83374716e+00   1.93824210e-17   0.00000000e+00]
+ [  1.37174729e+00   1.83600213e+00   6.91419308e-11]
+ [  9.92999233e-01   1.08783544e+00   1.82352680e+00]]
+
+Are V.T A V = e?
+False
+[ 0.6576724   0.93683989  3.8987638 ]
+
+Are the eigenvalues identical to the ones found using np.linalg?
+False
+
+
