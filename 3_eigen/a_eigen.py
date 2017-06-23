@@ -33,7 +33,7 @@ def jacobi_diag(A):
         while change:
             rotations_counter += 1
             change = False
-            for p in range(n - 1):
+            for p in range(n):
                 for q in range(p + 1, n):
                     change, rotations_counter = rotation(A, e, V, p, q, n,
                                                          change,

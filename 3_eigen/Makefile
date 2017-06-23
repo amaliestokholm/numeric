@@ -7,6 +7,7 @@ a_check.txt : a_main.py
 
 b_check.txt : b_main.py
 	python3 $< > $@
+
 clean : 
 	rm -f *.txt 
 	@echo "cleaned up"

@@ -26,6 +26,7 @@ A =
 
 Are V.T A V = e?
 False
+[ 1.8235268   1.83600213  3.18424897]
 [ 0.6576724   0.93683989  3.8987638 ]
 
 Are the eigenvalues identical to the ones found using np.linalg?

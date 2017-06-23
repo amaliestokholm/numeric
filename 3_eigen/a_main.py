@@ -30,6 +30,7 @@ def amain():
     e = np.sort(np.ravel((e)))
     print(np.allclose(e_check, e))
 
+    print(e)
     print(e_check)
     print('\nAre the eigenvalues identical to the ones found using np.linalg?')
     w, v = np.linalg.eig(A_copy)
