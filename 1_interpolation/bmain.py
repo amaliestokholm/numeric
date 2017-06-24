@@ -21,7 +21,7 @@ i_cos = interp(x, y)
 s_qspl, s_qsplint, s_qspldev = i_cos.qspline(z)
 
 # Print the values in order to save the stdout
-for i in np.arange(N):
+for i in range(N):
     if i < n:
         print('%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s'
               % (z[i], s_qspl[i], s_qsplint[i], s_qspldev[i], x[i], y[i], y_int[i], y_dev[i]))

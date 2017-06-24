@@ -10,7 +10,7 @@ def backsubstitution(R, b):
     for i in list[::-1]:
         # b is substituted for the solution to the system
         b[i] /= R[i, i]
-        for j in np.arange(i+1, n):
+        for j in range(i+1, n):
             b[i] -= b[j] * R[i, j] / R[i, i]
 
 
@@ -26,11 +26,11 @@ def qr_gs_decomp(A, R):
     assert m == p
 
     # Gram-Schmidt orthogonalization
-    for i in np.arange(m):
+    for i in range(m):
         R[i, i] = np.sqrt(np.dot(A[:, i], A[:, i]))
         # A is substituted for Q with orthogonalized vectors.
         A[:, i] /= R[i, i]
-        for j in np.arange(i+1, m):
+        for j in range(i+1, m):
             R[i, j] = np.dot(A[:, i], A[:, j])
             A[:, j] -= A[:, i] * R[i, j]
             R[j, i] = 0
@@ -51,7 +51,7 @@ def qr_gs_inverse(Q, R, b):
     n, m = Q.shape
     assert n == m
     eye = np.identity(m)
-    for i in np.arange(m):
+    for i in range(m):
         b[:, i] = eye[:, i]
         qr_gs_solve(Q, R, b[:, i])
 
@@ -62,10 +62,10 @@ def qr_gv_decomp(A):
     """
     n, m = A.shape
     assert n >= m
-    for p in np.arange(m):
-        for q in np.arange(p+1, n):
+    for p in range(m):
+        for q in range(p+1, n):
             theta = np.arctan2(A[q, p], A[p, p])
-            for i in np.arange(p, m):
+            for i in range(p, m):
                 xp = A[p, i]
                 xq = A[q, i]
                 A[p, i] = xp * np.cos(theta) + xq * np.sin(theta)
@@ -79,8 +79,8 @@ def qr_gv_solve(A, b):
     This function solves Ax = b if A has been decomposed
     """
     n, m = A.shape
-    for p in np.arange(m):
-        for q in np.arange(p+1, n):
+    for p in range(m):
+        for q in range(p+1, n):
             theta = A[q, p]
             xp = np.copy(b[p])
             xq = np.copy(b[q])
@@ -96,5 +96,5 @@ def qr_gv_inverse(A, b):
     n, m = A.shape
     assert n == m
     b[:] = np.identity(m)
-    for i in np.arange(m):
+    for i in range(m):
         qr_gv_solve(A, b[:, i])

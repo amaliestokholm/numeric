@@ -21,7 +21,7 @@ i_cos = interp(x, y)
 s_cspl, s_csplint, s_cspldev = i_cos.cspline(z)
 
 # Print the values in order to save the stdout
-for i in np.arange(N):
+for i in range(N):
     if i < n:
         print('%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s'
               % (z[i], s_cspl[i], s_csplint[i], s_cspldev[i], x[i], y[i], y_int[i], y_dev[i]))

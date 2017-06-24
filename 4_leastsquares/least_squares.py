@@ -31,6 +31,17 @@ def QR_lsfit(flist, x, y, dy):
     c = np.zeros(m, dtype='float64')
     dc = np.zeros(m, dtype='float64')
 
+    # Fill A and c
+    for i in range(n):
+        # Weight data by error
+        b[i] = y[i] / dy[i]
+
+        for j in range(m):
+            A[i, j] = flist[j](x[i]) / dy[i]
+
+    # Decompose using Given's rotation and solve by in-place backsub
+
+
 
 
 

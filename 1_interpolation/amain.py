@@ -21,7 +21,7 @@ i_cos = interp(x, y)
 s_lin, s_linint = i_cos.linterp(z)
 
 # Print the values in order to save the stdout
-for i in np.arange(0, N):
+for i in range(0, N):
     if i < n:
         print('%s\t%s\t%s\t%s\t%s\t%s' % (z[i], s_lin[i], s_linint[i], x[i], y[i], y_int[i]))
     else:

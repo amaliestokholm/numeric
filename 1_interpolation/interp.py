@@ -53,12 +53,12 @@ class interpolation:
         p = np.zeros(self.n-1)
 
         # Calculate x-interval and slope
-        for j in np.arange(self.n-1):
+        for j in range(self.n-1):
             dx[j] = self.x[j+1] - self.x[j]
             p[j] = (self.y[j+1] - self.y[j]) / dx[j]
         
         # Find c forward-recursively
-        list = np.arange(self.n-2)
+        list = range(self.n-2)
         for i in list:
             c[i+1] = (p[i+1] - p[i] - c[i] * dx[i]) / dx[i+1]
         
@@ -68,7 +68,7 @@ class interpolation:
             c[i] = (p[i+1] - p[i] - c[i+1] * dx[i+1]) / dx[i]
 
         # Find b
-        for i in np.arange(self.n-1):
+        for i in range(self.n-1):
             b[i] = p[i] - c[i] * dx[i]
         return b, c
 
@@ -87,37 +87,37 @@ class interpolation:
         p = np.zeros(self.n-1)
 
         # Calculate x-interval and slope
-        for j in np.arange(self.n-1):
+        for j in range(self.n-1):
             dx[j] = self.x[j+1] - self.x[j]
             p[j] = (self.y[j+1] - self.y[j]) / dx[j]
 
         # Fill B
         B[0] = 3 * p[0]
-        for i in np.arange(self.n-2):
+        for i in range(self.n-2):
             B[i+1] = 3 * (p[i] + p[i+1] * dx[i] / dx[i+1])
         B[-1] = 3 * p[-2]
         
         # Fill D
-        for i in np.arange(self.n-2):
+        for i in range(self.n-2):
             D[i+1] = 2 * dx[i] / dx[i+1] + 2
 
         # Fill Q
-        for i in np.arange(self.n-2):
+        for i in range(self.n-2):
             Q[i+1] = dx[i] / dx[i+1]
 
         # Gauss elimination
-        for i in np.arange(1, self.n):
+        for i in range(1, self.n):
             D[i] = D[i] - Q[i-1] / D[i-1]
             B[i] = B[i] - B[i-1] / D[i-1]
 
         # Back-substitution
         b[-1] = B[-1] / D[-1]
-        list = np.arange(self.n-1)
+        list = range(self.n-1)
         for i in list[::-1]:
             b[i] = (B[i] - Q[i] * b[i+1]) / D[i]
 
         # Calculate c and d
-        for i in np.arange(self.n-1):
+        for i in range(self.n-1):
             c[i] = (3 * p[i] - 2 * b[i] - b[i+1]) / dx[i]
             d[i] = (b[i] + b[i+1] - 2 * p[i]) / dx[i]
         c[-1] = -3 * d[-1] * dx[-1]
@@ -132,7 +132,7 @@ class interpolation:
         """
         result = 0
         p, i = self.binarysearch(z)
-        for j in np.arange(i):
+        for j in range(i):
             dx = self.x[j+1] - self.x[j]
             result = result + self.y[j] * dx + 0.5 * (self.y[j+1] - self.y[j]) * dx ** 2
         result = (result +
@@ -148,7 +148,7 @@ class interpolation:
         p, i = self.binarysearch(z)
         b = self.qb
         c = self.qc
-        for j in np.arange(i):
+        for j in range(i):
             dx = self.x[j+1] - self.x[j]
             result += (self.y[j] * dx + 0.5 * b[j] * dx ** 2 + (1 / 3) * c[j] * dx ** 2)
         zi = z - self.x[i]
@@ -165,7 +165,7 @@ class interpolation:
         b = self.cb
         c = self.cc
         d = self.cd
-        for j in np.arange(i):
+        for j in range(i):
             dx = self.x[j+1] - self.x[j]
             result += (self.y[j] * dx + 0.5 * b[j] * dx ** 2 + (1 / 3) * c[j] * dx ** 2 
                        + (1 / 4) * d[j] * dx ** 3)
@@ -180,7 +180,7 @@ class interpolation:
         z = np.asarray(z)
         s = np.zeros(z.shape)
         si = np.zeros(z.shape)
-        for j in np.arange(z.size):
+        for j in range(z.size):
             p, i = self.binarysearch(z[j])
             s[j] = self.y[i] + p * (z[j] - self.x[i])
             si[j] = self.linterp_integ(z[j])
@@ -197,7 +197,7 @@ class interpolation:
         sd = np.zeros(z.shape)
         b = self.qb
         c = self.qc
-        for j in np.arange(z.size):
+        for j in range(z.size):
             p, i = self.binarysearch(z[j])
             if func_flag is not None:
                 s[j] = self.y[i] + b[i] * (z[j] - self.x[i]) + c[i] * (z[j] - self.x[i]) ** 2 
@@ -219,7 +219,7 @@ class interpolation:
         b = self.cb
         c = self.cc
         d = self.cd
-        for j in np.arange(z.size):
+        for j in range(z.size):
             p, i = self.binarysearch(z[j])
             if func_flag is not None:
                 s[j] = (self.y[i] + b[i] * (z[j] - self.x[i]) + c[i] * (z[j] - self.x[i]) ** 2 
