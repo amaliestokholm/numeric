@@ -26,8 +26,8 @@ def QR_lsfit(flist, x, y, dy):
         - 'S': The covariance matrix
     """
     # Initialization
-    n = len(xs)
-    m = len(funcs)
+    n = len(x)
+    m = len(flist)
     A = np.zeros((n, m), dtype='float64')
     b = np.zeros(n, dtype='float64')
     c = np.zeros(m, dtype='float64')
@@ -44,6 +44,8 @@ def QR_lsfit(flist, x, y, dy):
 
     # Decompose using Given's rotation and solve by in-place backsub
     decomp(A)
+    print(A.shape)
+    print(b.shape)
     solve(A, b)
 
     # Save it in c
@@ -60,4 +62,11 @@ def QR_lsfit(flist, x, y, dy):
     for i in range(m):
         dc[i] = np.sqrt(S[i, i])
 
-    return c, dc, S
+    return c, dc
+
+
+def evalfunc(c, flist, x):
+    """
+    Evaluates the fit of a linear combination \sum{c_i * f_i(x)} at point x.
+    """
+    return sum([c[i] * flist[i](x) for i in range(len(flist))])
