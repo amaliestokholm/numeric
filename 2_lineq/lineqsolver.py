@@ -6,8 +6,8 @@ def backsubstitution(R, b):
     This function performs an in-place back-substitution
     """
     n, m = R.shape
-    assert n == m
-    assert b.shape == (n,)
+    #assert n == m
+    #assert b.shape == (n,)
     list = range(n)
     for i in list[::-1]:
         # b is substituted for the solution to the system
@@ -40,7 +40,7 @@ def qr_gs_decomp(A, R):
 
 def qr_gs_solve(Q, R, b):
     """
-    This function solves the triangular system QR*x = b by substituting b with Q^Tb and doing back-substitution. b is substited with the solution x.
+    This function solves the triangular system QR*x = b by substituting b with Q^Tb and doing back-substitution. b is substituted with the solution x.
     """
     b[:] = np.dot(Q.T, b)
     backsubstitution(R, b)
@@ -100,3 +100,15 @@ def qr_gv_inverse(A, b):
     b[:] = np.identity(m)
     for i in range(m):
         qr_gv_solve(A, b[:, i])
+
+
+def qr_gv_solve_return(A, b):
+    """
+    This function is almost identical to qr_gv_solve_return
+    """
+    v = b.copy()
+    qr_gv_solve(A, v)
+    x = np.zeros(A.shape[1])
+    for i in range(x.size):
+        x[i] = v[i]
+    return x
