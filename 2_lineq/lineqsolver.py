@@ -8,11 +8,11 @@ def backsubstitution(R, b):
     n, m = R.shape
     #assert n == m
     #assert b.shape == (n,)
-    list = range(n)
+    list = range(m)
     for i in list[::-1]:
         # b is substituted for the solution to the system
         b[i] /= R[i, i]
-        for j in range(i+1, n):
+        for j in range(i+1, m):
             b[i] -= b[j] * R[i, j] / R[i, i]
 
 
@@ -51,7 +51,7 @@ def qr_gs_inverse(Q, R, b):
     This function calculates the inverse of the matrix Q into the matrix b
     """
     n, m = Q.shape
-    assert n == m
+    assert b.shape == (m, m)
     eye = np.identity(m)
     for i in range(m):
         b[:, i] = eye[:, i]
@@ -93,7 +93,8 @@ def qr_gv_solve(A, b):
 
 def qr_gv_inverse(A, b):
     """
-    This function calculates the inverse of A into b
+    This function calculates the inverse of A into b. A is a symmetric matrix.
+    See also qr_gv_rinverse.
     """
     n, m = A.shape
     assert n == m
@@ -102,9 +103,20 @@ def qr_gv_inverse(A, b):
         qr_gv_solve(A, b[:, i])
 
 
+def qr_gv_rinverse(A, Rinv):
+    """
+    This routine calculates the inverse of R from A = QR.
+    """
+    n, m = A.shape
+    assert Rinv.shape == (m, m)
+    Rinv = np.identity(m)
+    for i in range(m):
+        backsubstitution(A, Rinv[:, i])
+
+
 def qr_gv_solve_return(A, b):
     """
-    This function is almost identical to qr_gv_solve_return
+    This function is almost identical to qr_gv_solve
     """
     v = b.copy()
     qr_gv_solve(A, v)

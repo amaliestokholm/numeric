@@ -5,7 +5,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../2_lineq/'))
 assert os.path.exists(sys.path[-1]), sys.path[-1]
 from lineqsolver import qr_gv_decomp as decomp
 from lineqsolver import qr_gv_solve_return as solve
-from lineqsolver import qr_gv_inverse as inverse
+from lineqsolver import qr_gv_rinverse as inverse
 sys.path.append(os.path.join(os.path.dirname(__file__), '../3_eigen/'))
 import a_eigen, b_eigen
 
@@ -48,7 +48,7 @@ def QR_lsfit(flist, x, y, dy):
 
     # Save it in c
     for i in range(m):
-        c[i] = b[i]
+        c[i] = x[i]
 
     # Calculate the inverse
     inverse(A, Rinv)
