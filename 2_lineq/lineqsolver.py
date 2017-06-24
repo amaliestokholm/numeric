@@ -6,7 +6,7 @@ def backsubstitution(R, b):
     This function performs an in-place back-substitution
     """
     n = len(R[:, 0])
-    list = np.arange(n)
+    list = range(n)
     for i in list[::-1]:
         # b is substituted for the solution to the system
         b[i] /= R[i, i]

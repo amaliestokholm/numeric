@@ -3,7 +3,9 @@ import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../2_lineq/'))
 assert os.path.exists(sys.path[-1]), sys.path[-1]
-import lineqsolver
+from lineqsolver import qr_gv_decomp as decomp
+from lineqsolver import gr_gv_solve as solve
+from lineqsolver import gr_gv_inverse as inverse
 sys.path.append(os.path.join(os.path.dirname(__file__), '../3_eigen/'))
 import a_eigen, b_eigen
 
@@ -20,8 +22,8 @@ def QR_lsfit(flist, x, y, dy):
         - 'dy': Vector with error on y data
     Returns:
         - 'c': Matrix containing the fitting coefficients
-        - 'S': The covariance matrix
         - 'dc': Uncertainties on the coefficients
+        - 'S': The covariance matrix
     """
     # Initialization
     n = len(xs)
@@ -30,6 +32,7 @@ def QR_lsfit(flist, x, y, dy):
     b = np.zeros(n, dtype='float64')
     c = np.zeros(m, dtype='float64')
     dc = np.zeros(m, dtype='float64')
+    Rinv = np.zeros((m, m), dtype='float64')
 
     # Fill A and c
     for i in range(n):
@@ -40,12 +43,21 @@ def QR_lsfit(flist, x, y, dy):
             A[i, j] = flist[j](x[i]) / dy[i]
 
     # Decompose using Given's rotation and solve by in-place backsub
+    decomp(A)
+    solve(A, b)
 
+    # Save it in c
+    for i in range(m):
+        c[i] = b[i]
 
+    # Calculate the inverse
+    inverse(A, Rinv)
 
+    # Calculate the covariance matrix S
+    S = np.dot(Rinv, np.transpose(Rinv))
 
+    # Calculate the uncertainties on the coefficients from S
+    for i in range(m):
+        dc[i] = np.sqrt(S[i, i])
 
-
-
-
-QR_lsfit(1, 2, 3)
+    return c, dc, S
