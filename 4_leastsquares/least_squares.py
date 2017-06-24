@@ -4,8 +4,8 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../2_lineq/'))
 assert os.path.exists(sys.path[-1]), sys.path[-1]
 from lineqsolver import qr_gv_decomp as decomp
-from lineqsolver import gr_gv_solve as solve
-from lineqsolver import gr_gv_inverse as inverse
+from lineqsolver import qr_gv_solve as solve
+from lineqsolver import qr_gv_inverse as inverse
 sys.path.append(os.path.join(os.path.dirname(__file__), '../3_eigen/'))
 import a_eigen, b_eigen
 
