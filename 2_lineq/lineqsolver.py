@@ -5,7 +5,9 @@ def backsubstitution(R, b):
     """
     This function performs an in-place back-substitution
     """
-    n = len(R[:, 0])
+    n, m = R.shape
+    assert n == m
+    assert b.shape == (n,)
     list = range(n)
     for i in list[::-1]:
         # b is substituted for the solution to the system
