@@ -2,10 +2,10 @@
 
 all : a_check.txt b_check.txt
 
-a_check.txt : a_main.py
+a_check.txt : amain.py
 	python3 $< > $@
 
-b_check.txt : b_main.py
+b_check.txt : bmain.py
 	python3 $< > $@
 
 clean : 

@@ -1,5 +1,5 @@
 import numpy as np
-import a_eigen as jacobi
+from eigen import diag as jacobi
 
 
 def amain():
@@ -16,7 +16,7 @@ def amain():
     # Run test
     print('Testing Jacobi diagonalization using the cyclic method')
     print('A = \n', A)
-    rot, e, V = jacobi.jacobi_diag(A)
+    rot, e, V = jacobi(A)
 
     print('\nNumber of rotations used =', rot)
     print('\nEigenvalues of A are:\ne =\n', e)
@@ -30,8 +30,6 @@ def amain():
     e = np.sort(np.ravel((e)))
     print(np.allclose(e_check, e))
 
-    print(e)
-    print(e_check)
     print('\nAre the eigenvalues identical to the ones found using np.linalg?')
     w, v = np.linalg.eig(A_copy)
     w = np.sort(np.ravel((w)))

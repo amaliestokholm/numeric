@@ -1,5 +1,5 @@
 import numpy as np
-import b_eigen as jacobi
+from eigen import eliminate as jacobi
 
 
 def bmain():
@@ -16,7 +16,7 @@ def bmain():
     # Run test
     print('Testing Jacobi diagonalization eigenvalue-by-eigenvalue')
     print('A = \n', A)
-    rot, e, V = jacobi.jacobi_eliminate(A)
+    rot, e, V = jacobi(A)
 
     print('\nNumber of rotations used =', rot)
     print('\nEigenvalues of A are:\ne =\n', e)
