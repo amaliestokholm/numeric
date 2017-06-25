@@ -103,6 +103,19 @@ def qr_gv_inverse(A, b):
         qr_gv_solve(A, b[:, i])
 
 
+def build_r(A):
+    """
+    This function calculates R from A = QR
+    """
+    n, m = A.shape
+    R = np.zeros((m, m), dtype='float64')
+
+    for i in range(m):
+        for j in range(i + 1):
+            R[j, i] = A[j, i]
+    return R
+
+
 def qr_gv_rinverse(A, Rinv):
     """
     This routine calculates the inverse of R from A = QR.

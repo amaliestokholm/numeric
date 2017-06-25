@@ -24,7 +24,6 @@ def amain():
     flist = [inv, const, lin]
     c, dc = leastsq.QR_lsfit(flist, x, y, dy)
     n = len(flist)
-    print(c, dc)
 
     # Prepare plot
     xs = 150
