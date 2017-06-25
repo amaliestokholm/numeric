@@ -24,16 +24,20 @@ def amain():
     flist = [inv, const, lin]
     c, dc = leastsq.QR_lsfit(flist, x, y, dy)
     n = len(flist)
+    print(c, dc)
 
     # Prepare plot
     xs = 150
     xfit = np.linspace(x[0], x[-1], xs)
-    yfit = np.array([leastsq.evalfunc(c, flist, xfit[i]) for i in range(n)])
-    yfit_l = np.array([leastsq.evalfunc(c - dc, flist, xfit[i]) for i in range(n)])
-    yfit_u = np.array([leastsq.evalfunc(c + dc, flist, xfit[i]) for i in range(n)])
 
-    for i in range(n):
-        print(xfit[i], yfit[i], yfit_l[i], yfit_u[i], sep='\t')
+    for i in range(len(x)):
+        print('%s\t%s\t%s' % (x[i], y[i], dy[i]))
+    print('\n\n')
+    for i in range(xs):
+        yfit = leastsq.evalfunc(c, flist, xfit[i])
+        yfit_l = leastsq.evalfunc(c - dc, flist, xfit[i])
+        yfit_u = leastsq.evalfunc(c + dc, flist, xfit[i])
+        print('%s\t%s\t%s\t%s' % (xfit[i], yfit, yfit_u, yfit_l))
 
 amain()
 
