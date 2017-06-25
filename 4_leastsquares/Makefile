@@ -9,7 +9,7 @@ aplot.$(FORMAT): ab_check.txt
 	set term $(FORMAT); \
 	set xlabel "x";\
 	set ylabel "y";\
-	set title "Least-Squares fit of F(x)=c_0/x+c_1+c_2x^2 to data" ;\
+	set title "Least-Squares fit of F(x)=c_0/x+c_1+c_2x to data" ;\
 	set tics out; \
 	set key above; \
 	set datafile separator "\t"; \
@@ -25,7 +25,7 @@ cplot.$(FORMAT): c_check.txt
 	set term $(FORMAT); \
 	set xlabel "x";\
 	set ylabel "y";\
-	set title "Least-Squares fit of F(x)=c_0/x+c_1+c_2x^2 to data using singular decompostion" ;\
+	set title "Least-Squares fit of F(x)=c_0/x+c_1+c_2x to data using singular decompostion" ;\
 	set tics out; \
 	set key above; \
 	set datafile separator "\t"; \
