@@ -13,3 +13,18 @@ Number of steps used: 26
 
 
 
+Check part B
+Minimize the Himmelblau function
+f(x, y) = (x^2 + y -11)^2 + (x + y^2 - 7)^2
+Starting point: x0 =
+ [ 0. -1.]
+f(x0) =
+ 180.0
+The minimum is found as:
+[-0.27084459 -0.92303856]
+f(min) =
+ 181.616521523
+Number of steps used: 3802
+
+
+

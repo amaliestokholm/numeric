@@ -29,7 +29,7 @@ def newton_minimize(f, grad, hessian, x0, alpha, eps=1e-10):
     n = len(x)
     fx = f(x)
     df = grad(x)
-    stepmax = 1000
+    stepmax = 5000
 
     # Begin root search
     while True:
