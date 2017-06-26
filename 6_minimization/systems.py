@@ -82,3 +82,29 @@ def hessian_himmelblau(q):
     H[1, 0] = 4 * x + 4 * y
     H[1, 1] = 4 * x + 12 * y * y - 26
     return H
+
+
+def decay(t, p):
+    """
+    The function fitting the activity of a radioactive substance.
+    Arguments:
+        - 't': Time
+        - 'p': Parameters
+    """
+    return p[0] * np.exp(-t / p[1]) + p[2]
+
+
+def master(t, y, s, p):
+    """
+    The master function to be minimized in order to determine the lifetime
+    Arguments:
+        - 't': Time
+        - 'y': Measurement of activity
+        - 's': Uncertainty on y
+        - 'p': Parameters
+    """
+    n = len(t)
+    sum = 0
+    for i in range(n):
+        sum += ((decay(p, t[i]) - y[i]) ** 2) / (s[i] * s[i])
+    return sum

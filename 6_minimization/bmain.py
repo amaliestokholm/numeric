@@ -89,4 +89,9 @@ def bmain():
     print('Number of steps using Newton root-finding with the Jacobian is',
           globvar.ncalls)
     print('\n\n')
+    
+    initpar = np.array([1, 1, 1], dtype='float64')
+    t, y, s = np.loadtxt('data.txt', sep='\t')
+    par = minimize.qnewton_minimize(systems.master, initpar
+
 bmain()
