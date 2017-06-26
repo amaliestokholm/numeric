@@ -1,0 +1,57 @@
+Check part A
+Solve the system A*x*y = 1
+, where exp(-x) + exp(-y) = 1 + 1/A, and A=10000.
+Starting point: x0 =
+ [ 3. -1.]
+f(x0) =
+ [ -3.00010000e+04   1.76796890e+00]
+The roots using Newton method:
+[  9.10614674e+00   1.09815933e-05]
+f(roots) =
+ [  7.32747196e-15   2.87556166e-15]
+Number of calls: 51
+
+
+
+Check part B
+Solve the Rosenbrock valley function
+Starting point: x0 =
+ [   1.  400.]
+f(x0) =
+ [-159600.   79800.]
+The roots using Newton method:
+[ 1.  1.]
+f(roots) =
+ [ 0.  0.]
+Number of calls: 12
+
+
+
+Check part C
+Solve the Himmelblau function
+Starting point: x0 =
+ [ 1. -1.]
+f(x0) =
+ [-54.  -2.]
+The roots using Newton method:
+[-0.27084459 -0.92303856]
+f(roots) =
+ [  3.45146134e-12  -2.07727169e-11]
+Number of calls: 18
+
+
+
+Check part D: Make some interesting example
+Solve the Matya function
+Starting point: x0 =
+ [ 1. -1.]
+f(x0) =
+ [ 1. -1.]
+The roots using Newton method:
+[ -2.17581588e-18  -2.18005105e-18]
+f(roots) =
+ [ -8.49997563e-20  -8.92349210e-20]
+Number of calls: 9
+
+
+

@@ -60,3 +60,20 @@ def himmelblau(q):
     z[1] = 2 * (x * x + y - 11) + 4 * (x + y * y -7) * y
     return z
 
+
+def matya(q):
+    """
+    Matyas function 
+    """
+    # Count the number of calls to function
+    globvar.ncalls += 1
+
+    # Initialize
+    z = np.zeros(2, dtype='float64')
+    x = q[0]
+    y = q[1]
+    
+    # Calculate
+    z[0] = 2 * 0.26 * x - 0.48 * y 
+    z[1] = 2 * 0.26 * y - 0.48 * x
+    return z
