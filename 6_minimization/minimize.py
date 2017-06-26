@@ -28,7 +28,7 @@ def newton_minimize(f, grad, hessian, x0, alpha, eps=1e-10):
     x = np.copy(x0)
     n = len(x)
     fx = f(x)
-    df = grad(f)
+    df = grad(x)
     stepmax = 1000
 
     # Begin root search
@@ -40,7 +40,7 @@ def newton_minimize(f, grad, hessian, x0, alpha, eps=1e-10):
 
         # Decompose and solve using Given's rotations
         decomp(H)
-        Dx = -fx
+        Dx = -df
         solve(H, Dx)
 
         # Begin backtracking linesearch
