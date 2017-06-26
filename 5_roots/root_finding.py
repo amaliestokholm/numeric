@@ -118,8 +118,7 @@ def newton_jacobian(f, x0, Jf, eps=1e-10):
 
         Dxnorm = np.linalg.norm(Dx)
         fxnorm = np.linalg.norm(fx)
-        dxnorm = np.linalg.norm(dx)
-        if Dxnorm < dxnorm or fxnorm < eps:
+        if fxnorm < eps:
             break
 
     return x

@@ -1,7 +1,7 @@
 FORMAT = pdf
 .PHONY: all a_check.txt c_check.txt amain.py cmain.py aplot.$(FORMAT) cplot.$(FORMAT) clean 
 
-all : a_check.txt 
+all : a_check.txt b_check.txt 
 
 aplot.$(FORMAT): ab_check.txt
 	echo '\
@@ -38,7 +38,7 @@ cplot.$(FORMAT): c_check.txt
 a_check.txt : amain.py
 	python3 $< > $@
 
-c_check.txt : cmain.py
+b_check.txt : bmain.py
 	python3 $< > $@
 
 clean : 

@@ -7,8 +7,6 @@ def sys(q):
     System of equations with A = 10000.
     A * x * y = 1
     exp(-y) + exp(-y) = 1 + 1/A
-    Returns:
-
     """
     # Count the number of calls to function
     globvar.ncalls += 1
