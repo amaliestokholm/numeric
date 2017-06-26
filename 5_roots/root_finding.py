@@ -5,9 +5,6 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../2_lineq/'))
 assert os.path.exists(sys.path[-1]), sys.path[-1]
 from lineqsolver import qr_gv_decomp as decomp
 from lineqsolver import qr_gv_solve as solve
-sys.path.append(os.path.join(os.path.dirname(__file__), '../3_eigen/'))
-assert os.path.exists(sys.path[-1]), sys.path[-1]
-import eigen
 
 
 def newton(f, x0, dx, eps=1e-10):
