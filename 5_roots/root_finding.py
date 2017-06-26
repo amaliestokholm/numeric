@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import sys
+import globvar
 sys.path.append(os.path.join(os.path.dirname(__file__), '../2_lineq/'))
 assert os.path.exists(sys.path[-1]), sys.path[-1]
 from lineqsolver import qr_gv_decomp as decomp
@@ -20,6 +21,7 @@ def newton(f, x0, dx, eps=1e-10):
         - 'x': Approximated root
     """
     # Initialization
+    globvar.ncalls = 0
     x = np.copy(x0)
     n = len(x)
     J = np.zeros((n, n), dtype='float64')
@@ -27,6 +29,7 @@ def newton(f, x0, dx, eps=1e-10):
 
     # Begin root search
     while True:
+        globvar.ncalls += 1
 
         # Fill the Jacobian matrix
         for j in range(n):
@@ -83,14 +86,15 @@ def newton_jacobian(f, x0, Jf, eps=1e-10):
         - 'x': Approximated root
     """
     # Initialization
+    globvar.ncalls = 0
     x = np.copy(x0)
     n = len(x)
     J = np.zeros((n, n), dtype='float64')
     fx = f(x)
 
-
     # Begin root search
     while True:
+        globvar.ncalls += 1
 
         # Calculate Jacobian
         J = Jf(x)
@@ -138,6 +142,7 @@ def newton_quad(f, x0, dx, eps=1e-10):
         - 'x': Approximated root
     """
     # Initialization
+    globvar.ncalls = 0
     x = np.copy(x0)
     n = len(x)
     J = np.zeros((n, n), dtype='float64')
@@ -145,6 +150,7 @@ def newton_quad(f, x0, dx, eps=1e-10):
 
     # Begin root search
     while True:
+        globvar.ncalls += 1
 
         # Fill the Jacobian matrix
         for j in range(n):

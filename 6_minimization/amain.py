@@ -24,13 +24,13 @@ def amain():
                                     x0, alpha)
     print(mini)
     print('f(min) =\n', systems.rosenbrock(mini))
-    print('Number of steps used:', globvar.steps)
+    print('Number of steps used:', globvar.ncalls)
     print('\n\n')
 
     # Initialization
-    x0 = np.array([0, -1], dtype='float64')
+    x0 = np.array([2.5, 2.0], dtype='float64')
     alpha = 1e-4
-    globvar.steps = 0
+    globvar.ncalls = 0
 
     print('Check part B')
     print('Minimize the Himmelblau function')
@@ -44,6 +44,6 @@ def amain():
                                     x0, alpha)
     print(mini)
     print('f(min) =\n', systems.himmelblau(mini))
-    print('Number of steps used:', globvar.steps)
+    print('Number of steps used:', globvar.ncalls)
     print('\n\n')
 amain()

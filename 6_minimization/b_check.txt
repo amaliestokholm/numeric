@@ -1,0 +1,42 @@
+Testing the quasi-Newton method with Broydens update
+Check part A
+Minimize the Rosenbrock valley function
+f(x, y) = (1 - x)^2 + 100 * (y - x^2)^2
+Starting point: x0 =
+ [-2.  2.]
+f(x0) =
+ 409.0
+The minimum is found as:
+[ 1.  1.]
+f(min) =
+ 4.97968446421e-30
+Number of steps used: 109
+We can now compare the number of steps used by different methods
+Number of steps used in the Newton minimization (A) is 26
+Number of steps used in the Newton root-finding is 523
+Number of steps using Newton root-finding with the Jacobian is 523
+
+
+
+Check part B
+Minimize the Himmelblau function
+f(x, y) = (x^2 + y -11)^2 + (x + y^2 - 7)^2
+Starting point: x0 =
+ [ 2.5  2. ]
+f(x0) =
+ 7.8125
+The minimum is found as:
+[ 3.  2.]
+f(min) =
+ 1.95159139242e-24
+Number of steps used: 9
+
+
+
+We can now compare the number of steps used by different methods
+Number of steps used in the Newton minimization (A) is 5
+Number of steps used in the Newton root-finding is 5
+Number of steps using Newton root-finding with the Jacobian is 5
+
+
+

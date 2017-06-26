@@ -25,6 +25,7 @@ def newton_minimize(f, grad, hessian, x0, alpha=1e-4, eps=1e-10):
         - 'x': Approximated root
     """
     # Initialization
+    globvar.ncalls = 0
     x = np.copy(x0)
     n = len(x)
     fx = f(x)
@@ -33,7 +34,7 @@ def newton_minimize(f, grad, hessian, x0, alpha=1e-4, eps=1e-10):
 
     # Begin root search
     while True:
-        globvar.steps += 1
+        globvar.ncalls += 1
 
         # Calculate Hessian matrix
         H = hessian(x)
@@ -53,7 +54,7 @@ def newton_minimize(f, grad, hessian, x0, alpha=1e-4, eps=1e-10):
             fy = f(y)
 
             # The Armijo condition
-            if (fy < fx + alpha * lamb * dfDx) or (lamb < (1 / 128.0)): 
+            if (fy < fx + alpha * lamb * dfDx) or (lamb < (1 / 128.0)):
                 break
 
         # Save latest approximation
@@ -62,17 +63,17 @@ def newton_minimize(f, grad, hessian, x0, alpha=1e-4, eps=1e-10):
         df = grad(x)
 
         dfnorm = np.linalg.norm(df)
-        if (dfnorm < eps) or (globvar.steps > stepmax):
+        if (dfnorm < eps) or (globvar.ncalls > stepmax):
             break
 
-    if globvar.steps > stepmax:
+    if globvar.ncalls > stepmax:
         print('\nToo many steps used!')
         exit()
     else:
         return x
 
 
-def qnewton(f, grad, x0, alpha=1e-4, eps=1e-10):
+def qnewton_minimize(f, grad, x0, alpha=1e-4, eps=1e-10):
     """
     This routine finds the minimum of a function using Quasi-Newton's method.
     The gradient is supplied by the user.
@@ -87,18 +88,19 @@ def qnewton(f, grad, x0, alpha=1e-4, eps=1e-10):
         - 'x': Approximated root
     """
     # Initialization
-    globvar.steps = 0
+    globvar.ncalls = 0
     x = np.copy(x0)
     n = len(x)
     fx = f(x)
     df = grad(x)
+    stepmax = 5000
 
     # Calculate the inverse of the Hessian matrix as I
     Hinv = np.identity(n)
 
     # Begin root search
     while True:
-        globvar.steps += 1
+        globvar.ncalls += 1
 
         # Put derivatives into the inverse Hessian matrix
         Dx = np.dot(Hinv, -df)
@@ -113,7 +115,7 @@ def qnewton(f, grad, x0, alpha=1e-4, eps=1e-10):
             fy = f(y)
 
             # The Armijo condition
-            if (fy < fx + alpha * lamb * dfDx)
+            if (fy < fx + alpha * lamb * dfDx):
                 break
 
             # Reset if the update diverges
@@ -135,10 +137,10 @@ def qnewton(f, grad, x0, alpha=1e-4, eps=1e-10):
         df = grad(x)
 
         dfnorm = np.linalg.norm(df)
-        if (dfnorm < eps) or (globvar.steps > stepmax):
+        if (dfnorm < eps) or (globvar.ncalls > stepmax):
             break
 
-    if globvar.steps > stepmax:
+    if globvar.ncalls > stepmax:
         print('\nToo many steps used!')
         exit()
     else:
