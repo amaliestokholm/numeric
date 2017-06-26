@@ -6,8 +6,6 @@ def backsubstitution(R, b):
     This function performs an in-place back-substitution
     """
     n, m = R.shape
-    #assert n == m
-    #assert b.shape == (n,)
     list = range(m)
     for i in list[::-1]:
         # b is substituted for the solution to the system
@@ -18,7 +16,8 @@ def backsubstitution(R, b):
 
 def qr_gs_decomp(A, R):
     """
-    This function performs an in-place modified Gram-Schmidt orthogonalization of an nxm matrix A.
+    This function performs an in-place modified Gram-Schmidt
+    orthogonalization of an nxm matrix A.
     A turns into Q and the square mxm matrix R is computed.
     """
     n, m = A.shape
@@ -40,7 +39,9 @@ def qr_gs_decomp(A, R):
 
 def qr_gs_solve(Q, R, b):
     """
-    This function solves the triangular system QR*x = b by substituting b with Q^Tb and doing back-substitution. b is substituted with the solution x.
+    This function solves the triangular system QR*x = b by substituting b
+    with Q^Tb and doing back-substitution. b is substituted with
+    the solution x.
     """
     b[:] = np.dot(Q.T, b)
     backsubstitution(R, b)

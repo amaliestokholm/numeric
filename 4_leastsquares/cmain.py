@@ -23,7 +23,6 @@ def cmain():
     x, y, dy = np.loadtxt('data.txt')
     flist = [inv, const, lin]
     c, dc = leastsq.singular_lsfit(flist, x, y, dy)
-    n = len(flist)
 
     # Prepare plot
     xs = 150
@@ -39,4 +38,3 @@ def cmain():
         print('%s\t%s\t%s\t%s' % (xfit[i], yfit, yfit_u, yfit_l))
 
 cmain()
-

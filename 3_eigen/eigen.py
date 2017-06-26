@@ -41,7 +41,6 @@ def diag(A):
     return rotations_counter, e, V
 
 
-
 def eliminate(A):
     """
     This routine performs matrix diagonalization on a real and symmetric

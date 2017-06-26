@@ -15,7 +15,7 @@ def QR_lsfit(flist, x, y, dy):
     """
     This routine calculates the fit of a linear combinations of a series of
     functions \sum{c_i * f_i(x)} to the data (x, y) with error dy on y, using
-    least mean squares and QR-decomposition with Given's rotation. 
+    least mean squares and QR-decomposition with Given's rotation.
     Arguments:
         - 'flist': List of functions to fit the data
         - 'x': Vector with x data
@@ -102,7 +102,7 @@ def singular_lsfit(flist, x, y, dy):
         for j in range(m):
             A[i, j] = flist[j](x[i]) / dy[i]
 
-    # Decompose using singular value decomposition 
+    # Decompose using singular value decomposition
     U, e, V = singular_decomp(A)
     c = singular_solve(U, e, V, b)
 
@@ -113,7 +113,6 @@ def singular_lsfit(flist, x, y, dy):
         for i in range(m):
             VDinv[j, i] = V[j, i] * dinv_i
     S = np.dot(VDinv, np.transpose(V))
-
 
     # Calculate the uncertainties on the coefficients from S
     for i in range(m):
@@ -126,7 +125,7 @@ def singular_decomp(A):
     """
     This routine computes the singular value decomposition using Jacobi's
     algorithm for dialonalization.
-    The matrix A is decomposed into A = U * S * V^T, where 
+    The matrix A is decomposed into A = U * S * V^T, where
     U = A * V * D^{-1/2} and S = D^{1/2}. D is a diagonal matrix containing
     the eigenvalues for A and V contains the corresponding eigenvectors.
     Arguments:
