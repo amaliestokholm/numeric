@@ -5,12 +5,12 @@ Starting point: x0 =
  [ 3. -1.]
 f(x0) =
  [ -3.00010000e+04   1.76796890e+00]
-The roots using Newton method:
+The roots using Newton method with quadratic linesearch:
 [  9.10614674e+00   1.09815933e-05]
 f(roots) =
  [  0.00000000e+00  -1.10182046e-17]
-Number of calls: 21
-Using the Newton method but without the Jacobian, the roots were
+Number of calls: 54
+Using the Newton method with linear linesearch, the roots were
 [  9.10614674e+00   1.09815933e-05]
 Using the method from part A, the number of calls were 49
 
@@ -22,12 +22,12 @@ Starting point: x0 =
  [   1.  400.]
 f(x0) =
  [-159600.   79800.]
-The roots using Newton method:
+The roots using Newton method with quadratic linesearch:
 [ 1.  1.]
 f(roots) =
- [ -1.78079773e-13   8.88178420e-14]
-Number of calls: 4
-Using the Newton method but without the Jacobian, the roots were
+ [ 0.  0.]
+Number of calls: 12
+Using the Newton method with linear linesearch, the roots were
 [ 1.  1.]
 Using the method from part A, the number of calls were 10
 
@@ -39,12 +39,12 @@ Starting point: x0 =
  [ 1. -1.]
 f(x0) =
  [-54.  -2.]
-The roots using Newton method:
+The roots using Newton method with quadratic linesearch:
 [-0.27084459 -0.92303856]
 f(roots) =
- [  2.46913601e-12  -2.13944418e-11]
-Number of calls: 8
-Using the Newton method but without the Jacobian, the roots were
+ [ 0.  0.]
+Number of calls: 21
+Using the Newton method with linear linesearch, the roots were
 [-0.27084459 -0.92303856]
 Using the method from part A, the number of calls were 16
 
@@ -56,12 +56,12 @@ Starting point: x0 =
  [ 1. -1.]
 f(x0) =
  [ 1. -1.]
-The roots using Newton method:
-[ -8.88178420e-16  -9.99200722e-16]
+The roots using Newton method with quadratic linesearch:
+[  3.08148791e-33   3.08148791e-33]
 f(roots) =
- [  1.77635684e-17  -9.32587341e-17]
-Number of calls: 4
-Using the Newton method but without the Jacobian, the roots were
+ [  1.23259516e-34   1.23259516e-34]
+Number of calls: 12
+Using the Newton method with linear linesearch, the roots were
 [ -2.17581588e-18  -2.18005105e-18]
 Using the method from part A, the number of calls were 7
 

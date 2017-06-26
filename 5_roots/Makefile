@@ -1,6 +1,6 @@
 .PHONY: all a_check.txt b_check.txt c_check.txt amain.py bmain.py cmain.py clean 
 
-all : a_check.txt b_check.txt 
+all : a_check.txt b_check.txt c_check.txt
 
 a_check.txt : amain.py
 	python3 $< > $@
