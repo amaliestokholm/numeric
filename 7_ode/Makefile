@@ -1,3 +1,4 @@
+ECHO = echo
 FORMAT = pdf
 PLOTTER = gnuplot
 .PHONY: all a_check.txt plot.$(FORMAT) amain.py bmain.py clean 
@@ -16,7 +17,7 @@ plot.$(FORMAT) : a_check.txt
 	set ylabel "y"; \
 	plot \
 	"$<" index 0 using 1:2 with lines title "y" \
-	,"$<" index 0 using 1:3 with points title "yd" \
+	,"$<" index 0 using 1:3 with lines title "yd" \
 	' | $(PLOTTER)
 
 a_check.txt : amain.py
