@@ -31,7 +31,7 @@ def mc_plain(F, a, b, N):
         sumsq += y * y
 
     # Calculate mean and variance
-    mean = s / N
+    mean = sum / N
     sigma = np.sqrt(sumsq / N - mean * mean)
 
     # Compute error and result
