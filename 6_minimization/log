@@ -1,0 +1,12 @@
+\
+set term pdf; \
+set output "plot.pdf"; \
+set tics out; \
+set key above ; \
+set xlabel "x";\
+set ylabel "y";\
+set xrange [0:10]; \
+plot \
+"data.txt" using 1:2:3 with yerrorbars title "Data"\
+ 	, "biv_data.txt" using 1:2 with lines title "Fit"\
+

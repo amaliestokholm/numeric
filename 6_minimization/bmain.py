@@ -69,7 +69,6 @@ def bmain():
     print(mini)
     print('f(min) =\n', systems.himmelblau(mini))
     print('Number of steps used:', globvar.ncalls)
-    print('\n\n')
     print('We can now compare the number of steps used by different methods')
     globvar.ncalls = 0
     mini = minimize.newton_minimize(systems.himmelblau,

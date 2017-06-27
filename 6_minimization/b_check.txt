@@ -30,9 +30,6 @@ The minimum is found as:
 f(min) =
  1.95159139242e-24
 Number of steps used: 9
-
-
-
 We can now compare the number of steps used by different methods
 Number of steps used in the Newton minimization (A) is 5
 Number of steps used in the Newton root-finding is 5

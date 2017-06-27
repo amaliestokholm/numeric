@@ -129,5 +129,8 @@ def grad_master(t, y, s, p):
     n = len(t)
     q = np.zeros(3, dtype='float64')
     for i in range(n):
-        q[0] = grad_decay(t[i], p) * (2 * (decay(t[i], p) - y[i]) / (s[i] * s[i]))
+        dec = decay(t[i], p)
+        gd = grad_decay(t[i], p)
+        for j in range(3):
+            q[j] = gd[j] * (2 * (dec - y[i]) / (s[i] * s[i]))
     return q
