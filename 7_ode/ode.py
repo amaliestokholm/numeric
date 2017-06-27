@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def rkstep23():
     """
     Embedded Runge-Kutta stepper of orders 3 and 2 usiung Bogacki-Shampine
@@ -53,3 +54,29 @@ def rkstep23():
     return yh, errnorm
 
 
+def rkdriver(F, a, b, ya, h, acc, eps, method):
+    """
+    This function is an adaptive step-size driver routine, which advances
+    the solution from a given value.
+    Arguments:
+        - 'F': Function to evolve
+        - 'a': Starting point
+        - 'b': End point
+        - 'ya': Function value at a
+        - 'h': Initial step-size
+        - 'acc': Absolute precision
+        - 'eps': Relative precision
+        - 'method': Name of the stepper function to be used
+    Returns:
+        - 'xs': Stored data
+        - 'ys': Stored data
+    """
+    # Identify which stepper to use
+    if method.lower() in ['rkstep23', 'rk23']:
+        stepper = rkstep23
+    else:
+        print('Unknown stepper chosen!')
+        return
+
+    # Initialize
+    
