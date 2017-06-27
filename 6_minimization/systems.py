@@ -94,9 +94,21 @@ def decay(t, p):
     return p[0] * np.exp(-t / p[1]) + p[2]
 
 
+def grad_decay(t, p):
+    """
+    This function computes the gradient of decay.
+    """
+    g = np.zeros(3, dtype='float64')
+    g[0] = np.exp(-t / p[1])
+    g[1] = (p[0] * t * np.exp(-t / p[1])) / (p[1] * p[1])
+    g[2] = 1
+    return g
+
+    
 def master(t, y, s, p):
     """
-    The master function to be minimized in order to determine the lifetime
+    The master function or the squared loss to be minimized in order to
+    determine the lifetime
     Arguments:
         - 't': Time
         - 'y': Measurement of activity
@@ -106,5 +118,16 @@ def master(t, y, s, p):
     n = len(t)
     sum = 0
     for i in range(n):
-        sum += ((decay(p, t[i]) - y[i]) ** 2) / (s[i] * s[i])
+        sum += ((decay(t[i], p) - y[i]) ** 2) / (s[i] * s[i])
+    return sum
+
+
+def grad_master(t, y, s, p):
+    """
+    This function computes the gradient of the squared loss
+    """
+    n = len(t)
+    sum = 0
+    for i in range(n):
+        sum += y[i] * (2 * (t[i] - y[i]) / (s[i] * s[i]))
     return sum
