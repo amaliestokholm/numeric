@@ -64,3 +64,25 @@ def quad_integrator(F, a, b, f1, f4, nrec, acc, eps):
     # Calculate
     Q = h * (w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4)
     q = h * (v1 * f1 + v2 * f2 + v3 * f3 + v4 * f4)
+
+    # Estimate error and determine tolerance
+    err = abs(Q - q)
+    tol = acc + eps * abs(Q)
+
+    # Accept integration is the error is small
+    if err < tol:
+        return Q, err
+
+    # If error is small, then divide the interval in three pieces
+    # and integrate each section.
+    else:
+        divide = np.sqrt(3)
+        Q1, err1 = quad_integrator(F, a, (a + h)/3., f1, f2, nrec+=1,
+                                   acc / divide, eps)
+        Qm, errm = quad_integrator(F, (a + h)/3., (a + 2 * h)/3.0, f2, f3, nrec+=1,
+                                   acc / divide, eps)
+        Qr, errr = quad_integrator(F, (a + 2 * h)/3.0, b, f3, f4, nrec+=1,
+                                   acc / divide, eps)
+        Qtot = Q1 + Qm + Qr
+        errtot = np.sqrt(err1 * err1 + errm * errm + errr * errr)
+        return Qtot, errtot
