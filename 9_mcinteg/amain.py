@@ -11,18 +11,25 @@ def f1(q):
 
 def f2(q):
     """
-    Test functino to integrate: x * (x - y^2)
+    Test function to integrate: (1 - cos(x)cos(y)cos(z))^(-1)
     """
-    return q[0] * (q[0] - (q[1] * q[1]))
+    func = (1 - np.cos(q[0]) * np.cos(q[1]) * np.cos(q[2])) ** (-1) 
+    norm = np.pi ** 3
+    return func / norm
 
 
 def amain():
     """
     Test of the Monte Carlo routine
     """
+    # Initialization
     a1 = np.array([0, 0])
     b1 = np.array([np.pi / 2., np.pi])
+    a2 = np.array([0, 0, 0])
+    b2 = np.array([np.pi, np.pi, np.pi])
     N1 = 1000
+    N2 = 100000
+    exact2 = 1.3932039296856768591842462603255
 
     print('Integrating y * sin(x) from (x,y) =\n', a1)
     print('to (x,y) = \n', b1)
@@ -30,6 +37,14 @@ def amain():
     res1, err1 = mc.mc_plain(f1, a1, b1, N1)
     print('The integral is', res1)
     print('The error on the integral is', err1)
+
+    print('Integrating (1 - cos(x) * cos(y) * cos(z))^{-1} from (x,y) =\n',a2)
+    print('to (x,y) = \n', b2)
+    print('The sampling in points is', N2)
+    res2, err2 = mc.mc_plain(f2, a2, b2, N2)
+    print('The integral is', res2)
+    print('The error on the integral is', err2)
+    print('The actual error is',abs(res2 - exact2))
 
 amain()
 
