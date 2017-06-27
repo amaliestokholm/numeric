@@ -8,6 +8,7 @@ def f(x, y):
     """
     return np.array([y[1], -y[0]])
 
+
 def amain():
     """
     Test of the ODE routines

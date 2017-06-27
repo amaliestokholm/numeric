@@ -179,7 +179,7 @@ def rkdriver(F, a, b, ya, h, method, acc=1e-9, eps=1e-9, calls=False):
         else:
             h *= 2
 
-    if (calls == True):
+    if calls is True:
         return xs, ys, cs
 
     else:

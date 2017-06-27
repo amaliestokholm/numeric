@@ -27,7 +27,7 @@ def bmain():
     # Evolve the system
     xs, ys, cs = ode.rkdriver(f, a, b, yinit, step, 'rkstep23', acc, eps,
                               calls=True)
-    
+
     print('Output from RK23: y0')
     # Print output
     for i in range(len(xs)):
@@ -40,7 +40,7 @@ def bmain():
     # Evolve the system
     xs, ys, cs = ode.rkdriver(f, a, b, yinit, step, 'rkstep3', acc, eps,
                               calls=True)
-    
+
     print('Output from RK3: y0')
     # Print output
     for i in range(len(xs)):
