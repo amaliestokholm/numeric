@@ -1,9 +1,9 @@
 ECHO = echo
 FORMAT = pdf
 PLOTTER = gnuplot
-.PHONY: all a_check.txt plot.$(FORMAT) amain.py bmain.py clean 
+.PHONY: all a_check.txt b_check.txt plot.$(FORMAT) amain.py bmain.py clean 
 
-all : plot.$(FORMAT) #a_check.txt b_check.txt #c_check.txt
+all : plot.$(FORMAT) b_check.txt
 
 plot.$(FORMAT) : a_check.txt
 	$(ECHO) '\
@@ -26,9 +26,6 @@ a_check.txt : amain.py
 b_check.txt : bmain.py
 	python3 $< > $@
 
-biv_data.txt : bivmain.py
-	python3 $< > $@
-
 clean : 
-	rm -f a_check.txt b_check.txt biv_data.txt
+	rm -f a_check.txt b_check.txt plot.$(FORMAT)
 	@echo "cleaned up"
