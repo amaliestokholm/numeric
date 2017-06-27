@@ -54,7 +54,7 @@ def rkstep23():
     return yh, errnorm
 
 
-def rkdriver(F, a, b, ya, h, acc, eps, method):
+def rkdriver(F, a, b, ya, h, method, acc=1e-9, eps=1e-9):
     """
     This function is an adaptive step-size driver routine, which advances
     the solution from a given value.
@@ -64,9 +64,9 @@ def rkdriver(F, a, b, ya, h, acc, eps, method):
         - 'b': End point
         - 'ya': Function value at a
         - 'h': Initial step-size
+        - 'method': Name of the stepper function to be used
         - 'acc': Absolute precision
         - 'eps': Relative precision
-        - 'method': Name of the stepper function to be used
     Returns:
         - 'xs': Stored data
         - 'ys': Stored data
@@ -79,4 +79,38 @@ def rkdriver(F, a, b, ya, h, acc, eps, method):
         return
 
     # Initialize
-    
+    xs = np.array([a], dtype='float64')
+    ys = np.array([ya], dtype='float64')
+    power = 0.25
+    safety = 0.95
+
+    # Start evolving
+    while True:
+        x = xs[-1]
+        y = ys[-1]
+        
+        # Stopping criteria
+        if x >= b:
+            break
+
+        # If the step ends outside the interval, step to the edge
+        if (x + h) > b:
+            h = b - x
+
+        # Perform the step
+        yh, err = stepper(F, x, y, h)
+
+        # Calculate tolerance
+        tol = (eps * np.linalg.norm(yh) + acc) * np.sqrt(h / (b - a))
+
+        # Accept step if error is less than tolerance
+        if err < tol:
+            xs = np.append(xs, x + h)
+            ys = np.vstack([ys, yh])
+
+        # Decrease the step if error is non-zero, else double it.
+        if err > 0:
+            h *= (tol / err) ** (power) * safety
+        else:
+            h *= 2
+    return xs, ys
