@@ -15,6 +15,6 @@ par = minimize.qnewton_minimize(sl, grad_sl, initpar, alpha)
 for i in range(len(xs)):
     if i < len(t):
         print('%s\t%s\t%s\t&s\t%s'
-              % (xs[i], systems.decay(par, xs[i]), t[i], y[i], s[i]))
+              % (xs[i], systems.decay(xs[i], par), t[i], y[i], s[i]))
     else:
-        print('%s\t%s' % (xs[i], systems.decay(par, xs[i])))
+        print('%s\t%s' % (xs[i], systems.decay(xs[i], par)))

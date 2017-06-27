@@ -2,9 +2,9 @@ FORMAT = pdf
 PLOTTER = gnuplot
 .PHONY: all a_check.txt b_check.txt biv_data.txt amain.py bmain.py bivmain.py clean 
 
-all : a_check.txt b_check.txt #c_check.txt
+all : a_check.txt b_check.txt plot.$(FORMAT) 
 
-plot.$(FORMAT) : biv_data.txt
+plot.$(FORMAT) : biv_data.txt data.txt
 	$(RM) $(SCRIPT)
 	$(ECHO) '\
 		set term $(FORMAT); \
@@ -16,9 +16,9 @@ plot.$(FORMAT) : biv_data.txt
 		set xlabel "t"; \
 		set ylabel "Activity"; \
 		plot \
-		"$<" using 1:2  with lines title "Fit" \
-		, "$<" using 3:4 with points title "Experiments" \
-		, "$<" using 5 with errorbars \
+		"$(word 1, $^)" using 1:2  with lines title "Fit" \
+		, "$(word 2, $^)" using 1:2 with points title "Experiments" \
+		, "$(word 2, $^)  using 3 with errorbars \
 		' | tee $(SCRIPT) | $(PLOTTER)
 
 a_check.txt : amain.py

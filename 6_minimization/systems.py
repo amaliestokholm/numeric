@@ -127,7 +127,7 @@ def grad_master(t, y, s, p):
     This function computes the gradient of the squared loss
     """
     n = len(t)
-    sum = 0
+    q = np.zeros(3, dtype='float64')
     for i in range(n):
-        sum += y[i] * (2 * (t[i] - y[i]) / (s[i] * s[i]))
-    return sum
+        q[0] = grad_decay(t[i], p) * (2 * (decay(t[i], p) - y[i]) / (s[i] * s[i]))
+    return q

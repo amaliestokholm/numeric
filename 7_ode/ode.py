@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def rkstep23():
+def rkstep23(F, x, y, h):
     """
     Embedded Runge-Kutta stepper of orders 3 and 2 usiung Bogacki-Shampine
     method
@@ -30,7 +30,7 @@ def rkstep23():
 
     # Determine the weights
     b1 = 2 / 9.0
-    b1 = 1 / 3.0
+    b2 = 1 / 3.0
     b3 = 4 / 9.0
     b4 = 0
 
