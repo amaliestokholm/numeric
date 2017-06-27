@@ -132,5 +132,5 @@ def grad_master(t, y, s, p):
         dec = decay(t[i], p)
         gd = grad_decay(t[i], p)
         for j in range(3):
-            q[j] = gd[j] * (2 * (dec - y[i]) / (s[i] * s[i]))
+            q[j] += gd[j] * (2 * (dec - y[i]) / (s[i] * s[i]))
     return q
