@@ -47,6 +47,9 @@ def bmain():
     print('The actual error is', abs(res5 - exact5))
     print('The number of recursions was', globvar.ncalls)
     print('The depth of the recursion was', recmax5)
+    compare, cerr = integrate.quad(f5, a, b)
+    print('Scipys integrate quad gives', compare) 
+    print('with error', cerr)
     print('\n\n')
 
     # Initialization
@@ -63,6 +66,9 @@ def bmain():
     print('The actual error is', abs(res6 - exact6))
     print('The number of recursions was', globvar.ncalls)
     print('The depth of the recursion was', recmax6)
+    compare, cerr = integrate.quad(f6, a, b)
+    print('Scipys integrate quad gives', compare) 
+    print('with error', cerr)
     print('\n\n')
 
     # Initialization
@@ -79,5 +85,8 @@ def bmain():
     print('The actual error is', abs(res7 - exact7))
     print('The number of recursions was', globvar.ncalls)
     print('The depth of the recursion was', recmax7)
+    compare, cerr = integrate.quad(f7, a, b)
+    print('Scipys integrate quad gives', compare) 
+    print('with error', cerr)
     print('\n\n')
 bmain()

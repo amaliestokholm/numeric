@@ -7,6 +7,8 @@ The error on the integral is 6.14555413435e-08
 The actual error is 5.0283721631e-10
 The number of function calls was 692
 The depth of the recursion was 16
+Scipys integrate quad gives 0.6666666666666669
+with error 7.401486830834379e-16
 
 
 
@@ -19,6 +21,8 @@ The error on the integral is 5.67932069243e-08
 The actual error is 2.42712516751e-11
 The number of function calls was 315776
 The depth of the recursion was 1072
+Scipys integrate quad gives 1.9999999999999984
+with error 5.773159728050814e-15
 
 
 
@@ -31,6 +35,8 @@ The error on the integral is 5.84786714061e-08
 The actual error is 1.30406796472e-11
 The number of recursions was 939904
 The depth of the recursion was 1072
+Scipys integrate quad gives -4.000000000000085
+with error 1.354472090042691e-13
 
 
 
@@ -43,6 +49,8 @@ The error on the integral is 4.78882823341e-08
 The actual error is 1.67823088759e-10
 The number of recursions was 1592
 The depth of the recursion was 19
+Scipys integrate quad gives 3.1415926535897922
+with error 3.533564552071766e-10
 
 
 

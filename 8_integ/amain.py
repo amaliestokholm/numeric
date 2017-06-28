@@ -60,6 +60,9 @@ def amain():
     print('The actual error is', abs(res1 - exact1))
     print('The number of function calls was', globvar.ncalls)
     print('The depth of the recursion was', recmax1)
+    compare, cerr = integrate.quad(f1, a, b)
+    print('Scipys integrate quad gives', compare)
+    print('with error', cerr)
     print('\n\n')
 
     globvar.ncalls = 0
@@ -71,6 +74,9 @@ def amain():
     print('The actual error is', abs(res2 - exact2))
     print('The number of function calls was', globvar.ncalls)
     print('The depth of the recursion was', recmax2)
+    compare, cerr = integrate.quad(f2, a, b)
+    print('Scipys integrate quad gives', compare)
+    print('with error', cerr)
     print('\n\n')
 
     globvar.ncalls = 0
@@ -82,6 +88,9 @@ def amain():
     print('The actual error is', abs(res3 - exact3))
     print('The number of recursions was', globvar.ncalls)
     print('The depth of the recursion was', recmax3)
+    compare, cerr = integrate.quad(f3, a, b)
+    print('Scipys integrate quad gives', compare)
+    print('with error', cerr)
     print('\n\n')
 
     globvar.ncalls = 0
@@ -93,5 +102,8 @@ def amain():
     print('The actual error is', abs(res4 - exact4))
     print('The number of recursions was', globvar.ncalls)
     print('The depth of the recursion was', recmax4)
+    compare, cerr = integrate.quad(f4, a, b)
+    print('Scipys integrate quad gives', compare)
+    print('with error', cerr)
     print('\n\n')
 amain()
