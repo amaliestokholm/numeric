@@ -2,6 +2,13 @@ import numpy as np
 import globvar
 
 
+def nodes(a, b, x):
+    """
+    Calculation that finds the nodes
+    """
+    return a + x * (b - a)
+
+
 def integ_recursive(F, a, b, acc=1e-4, eps=1e-4):
     """
     This routine computes recursive adaptive integration using closed
@@ -20,50 +27,41 @@ def integ_recursive(F, a, b, acc=1e-4, eps=1e-4):
     assert a < b, 'Check your limits!'
 
     # Perform integration
-    h = b - a
-    x1 = 0
-    x4 = 1
-    f1 = F(a + h * x1)
-    f4 = F(a + h * x4)
+    x = np.array([1 / 6, 2 / 6, 4 / 6, 5 / 6])
+    f1 = F(nodes(a, b, x[1]))
+    f2 = F(nodes(a, b, x[2]))
 
-    Q, err = quad_integrator(F, a, b, f1, f4, nrec=0, acc=acc, eps=eps)
+    Q, err = quad_integrator(F, a, b, x, f1, f2, nrec=0, acc=acc, eps=eps)
     return Q, err
 
 
-def quad_integrator(F, a, b, f1, f4, nrec, acc, eps):
+def quad_integrator(F, a, b, x, f1, f2, nrec, acc, eps):
     """
     This function integrates the function from a to b using previously
-    determined points. If the error is too big, the interval is
-    sub-divided and the integrator calls itself.
+    determined points using an open set of equidistant nodes.
+    If the error is too big, the interval is sub-divided
+    and the integrator calls itself.
     New arguments:
-        - 'f1': Estimated value of F(a)
-        - 'f4': Estimated value of F(b)
+        - 'f1': Estimated value of F(a + (b - a)/3)
+        - 'f2': Estimated value of F(a + 2(b - a)/3)
         - 'nrec': The current level of recursion
     """
     assert nrec < globvar.nrecmax
 
-    # Estimate to two points in-between
+    # Estimate to two points end points
     h = b - a
-    x2 = 1 / 3.0
-    x3 = 2 / 3.0
-    f2 = F(a + h * x2)
-    f3 = F(a + h * x3)
+    f0 = F(nodes(a, b, x[0]))
+    f3 = F(nodes(a, b, x[3]))
 
     # Weights of 4th order trapezium rule
-    w1 = 1 / 8.0
-    w2 = 3 / 8.0
-    w3 = 3 / 8.0
-    w4 = 1 / 8.0
+    w = np.array([2 / 6.0, 1 / 6.0, 1 / 6.0, 2 / 6.0])
 
     # Weights of 4th order trapezium rule
-    v1 = 1 / 4.0
-    v2 = 1 / 4.0
-    v3 = 1 / 4.0
-    v4 = 1 / 4.0
+    v = np.ones(4) * (1 / 4.0)
 
     # Calculate
-    Q = h * (w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4)
-    q = h * (v1 * f1 + v2 * f2 + v3 * f3 + v4 * f4)
+    Q = h * (w[0] * f0 + w[1] * f1 + w[2] * f2 + w[3] * f3)
+    q = h * (v[0] * f0 + v[1] * f1 + v[2] * f2 + v[3] * f3)
 
     # Estimate error and determine tolerance
     err = abs(Q - q)
@@ -78,12 +76,10 @@ def quad_integrator(F, a, b, f1, f4, nrec, acc, eps):
     else:
         accsec = acc / np.sqrt(2)
         sec = (a + b) / 2
-        Q1, err1 = quad_integrator(F, a, sec, f1, f2, nrec+1,
+        Q1, err1 = quad_integrator(F, a, sec, x, f0, f1, nrec+1,
                                    acc=accsec, eps=eps)
-        #Qm, errm = quad_integrator(F, sec, 2 * sec, f2, f3, nrec+1,
-        #                           acc=accsec, eps=eps)
-        Qr, errr = quad_integrator(F, sec, b, f3, f4, nrec+1,
+        Q2, err2 = quad_integrator(F, sec, b, x, f2, f3, nrec+1,
                                    acc=accsec, eps=eps)
-        Qtot = Q1 + Qr
-        errtot = np.sqrt(err1 * err1 + errr * errr)
+        Qtot = Q1 + Q2
+        errtot = np.sqrt(err1 * err1 + err2 * err2)
         return Qtot, errtot
