@@ -11,7 +11,7 @@ def nodes(a, b, x):
 
 def integ_recursive(F, a, b, acc=1e-4, eps=1e-4):
     """
-    This routine computes recursive adaptive integration using closed
+    This routine computes recursive adaptive integration using open
     QUADratures. It uses a 4th order trapezium evaluation rule with
     2nd order rectangular rule for error estimation.
     Arguments:
@@ -25,6 +25,23 @@ def integ_recursive(F, a, b, acc=1e-4, eps=1e-4):
         - 'err': An estimate of the error on Q
     """
     assert a < b, 'Check your limits!'
+    # An infinite limit integral is converted by a variable transformation
+    # to a finite limit integral
+    if np.any(np.isinf([a, b])):
+        if a is np.NINF and b is not np.PINF:
+            F = f 
+            a = -1
+            b = 0
+            def f(x):
+                return F(b + (t / (1 + t))) * (1 / ((1 + t) ** 2))
+        elif a is not np.NINF and b is np.PINF:
+            F = lambda t: F(a + (t / (1 - t))) * (1 / ((1 - t) ** 2))
+            a = 0
+            b = 1
+        else:
+            F = lambda t: F(t / (1 - t ** 2)) * ((1 + t ** 2) / (1 - t ** 2) ** 2)
+            a = -1
+            b = 1
 
     # Perform integration
     x = np.array([1 / 6, 2 / 6, 4 / 6, 5 / 6])
