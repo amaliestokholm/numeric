@@ -1,31 +1,26 @@
 ECHO = echo
 FORMAT = pdf
 PLOTTER = gnuplot
-.PHONY: all a_check.txt b_check.txt plot.$(FORMAT) amain.py bmain.py clean 
+.PHONY: all a_check.txt aerr.txt plot.$(FORMAT) amain.py clean 
 
-all : a_check.txt #plot.$(FORMAT) b_check.txt
+all : a_check.txt plot.$(FORMAT)
 
-plot.$(FORMAT) : a_check.txt
+plot.$(FORMAT) : aerr.txt
 	$(ECHO) '\
 	set term $(FORMAT); \
 	set output "$@"; \
 	set tics out; \
 	set key above ; \
-	set xrange [0:10]; \
-	set yrange [-1.1:1.1]; \
-	set xlabel "x"; \
-	set ylabel "y"; \
+	set logscale xy ; \
+	set xlabel "Error"; \
+	set ylabel "N"; \
 	plot \
-	"$<" index 0 using 1:2 with lines title "y" \
-	,"$<" index 0 using 1:3 with lines title "yd" \
+	"$<" index 0 using 1:2 with lines \
 	' | $(PLOTTER)
 
 a_check.txt : amain.py
-	python3 $< > $@
-
-b_check.txt : bmain.py
-	python3 $< > $@
+	python3 $< > $@ 2> aerr.txt
 
 clean : 
-	rm -f a_check.txt b_check.txt plot.$(FORMAT)
+	rm -f a_check.txt aerr.txt plot.$(FORMAT)
 	@echo "cleaned up"

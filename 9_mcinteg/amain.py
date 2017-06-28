@@ -1,5 +1,6 @@
 import numpy as np
 import mcinteg as mc
+import sys
 
 
 def f1(q):
@@ -37,6 +38,13 @@ def amain():
     res1, err1 = mc.mc_plain(f1, a1, b1, N1)
     print('The integral is', res1)
     print('The error on the integral is', err1)
+
+    # Error-estimation as a function of N
+    print('# Error-estimate from part A', file=sys.stderr)
+    for k in range(1, 8):
+        N = int(10 ** k)
+        res, err = mc.mc_plain(f1, a1, b1, N)
+        print('%s\t%s' % (N, err), file=sys.stderr)
 
     print('Integrating (1 - cos(x) * cos(y) * cos(z))^{-1} from (x,y) =\n',a2)
     print('to (x,y) = \n', b2)
