@@ -31,8 +31,8 @@ def integ_recursive(F, a, b, acc=1e-4, eps=1e-4):
     f1 = F(nodes(a, b, x[1]))
     f2 = F(nodes(a, b, x[2]))
 
-    Q, err = quad_integrator(F, a, b, x, f1, f2, nrec=0, acc=acc, eps=eps)
-    return Q, err
+    Q, err, recmax = quad_integrator(F, a, b, x, f1, f2, nrec=0, acc=acc, eps=eps)
+    return Q, err, recmax
 
 
 def quad_integrator(F, a, b, x, f1, f2, nrec, acc, eps):
@@ -46,8 +46,6 @@ def quad_integrator(F, a, b, x, f1, f2, nrec, acc, eps):
         - 'f2': Estimated value of F(a + 2(b - a)/3)
         - 'nrec': The current level of recursion
     """
-    assert nrec < globvar.nrecmax
-
     # Estimate to two points end points
     h = b - a
     f0 = F(nodes(a, b, x[0]))
@@ -69,17 +67,18 @@ def quad_integrator(F, a, b, x, f1, f2, nrec, acc, eps):
 
     # Accept integration is the error is small
     if err < tol:
-        return Q, err
+        return Q, err, nrec
 
     # If error is small, then divide the interval in three pieces
     # and integrate each section.
     else:
         accsec = acc / np.sqrt(2)
         sec = (a + b) / 2
-        Q1, err1 = quad_integrator(F, a, sec, x, f0, f1, nrec+1,
-                                   acc=accsec, eps=eps)
-        Q2, err2 = quad_integrator(F, sec, b, x, f2, f3, nrec+1,
-                                   acc=accsec, eps=eps)
+        Q1, err1, rec1 = quad_integrator(F, a, sec, x, f0, f1, nrec+1,
+                                         acc=accsec, eps=eps)
+        Q2, err2, rec2 = quad_integrator(F, sec, b, x, f2, f3, nrec+1,
+                                         acc=accsec, eps=eps)
         Qtot = Q1 + Q2
         errtot = np.sqrt(err1 * err1 + err2 * err2)
-        return Qtot, errtot
+        recmax = max(rec1, rec2)
+        return Qtot, errtot, recmax
