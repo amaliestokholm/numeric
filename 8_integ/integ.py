@@ -28,6 +28,8 @@ def integ_recursive(F, a_orig, b_orig, acc=1e-4, eps=1e-4):
     # An infinite limit integral is converted by a variable transformation
     # to a finite limit integral
     f = F
+    a = a_orig
+    b = b_orig
     if np.any(np.isinf([a_orig, b_orig])):
         if a_orig is np.NINF and b_orig is not np.PINF:
             F = lambda t: f(b_orig + (t / (1 + t))) * (1 / ((1 + t) ** 2))

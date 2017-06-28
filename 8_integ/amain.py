@@ -109,7 +109,7 @@ def amain():
     exact5 = np.sqrt(np.pi)
 
     globvar.ncalls = 0
-    print('Integrating 4 sqrt(1 - (1 -x)^2) from (x) =\n',a)
+    print('Integrating exp(-x^2) from (x) =\n',a)
     print('to (x) =\n', b)
     res5, err5, recmax5 = integ.integ_recursive(f5, a, b, acc, eps) 
     print('The integral is', res5)
