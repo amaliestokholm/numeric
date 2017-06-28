@@ -1,0 +1,36 @@
+Integrating exp(-x^2) from (x) =
+ -inf
+to (x) =
+ inf
+The integral is 1.77245362623
+The error on the integral is 5.16287805879e-08
+The actual error is 2.24671807825e-07
+The number of recursions was 2816
+The depth of the recursion was 11
+
+
+
+Integrating exp(-4x) from (x) =
+ 0
+to (x) =
+ inf
+The integral is 0.249999998412
+The error on the integral is 4.42689152416e-08
+The actual error is 1.58766738645e-09
+The number of recursions was 572
+The depth of the recursion was 8
+
+
+
+Integrating exp(5x) from (x) =
+ -inf
+to (x) =
+ 0
+The integral is 0.199999949078
+The error on the integral is 4.20181666492e-08
+The actual error is 5.09216423195e-08
+The number of recursions was 612
+The depth of the recursion was 8
+
+
+

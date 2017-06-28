@@ -38,14 +38,6 @@ def f4(x):
     return 4 * np.sqrt(1 - (1 - x) ** 2)
 
 
-def f5(x):
-    """
-    Test function: exp(-x)
-    """
-    globvar.ncalls += 1
-    return np.exp(-(x ** 2))
-
-
 def amain():
     """
     Test of the routines for adaptive integration
@@ -101,21 +93,5 @@ def amain():
     print('The actual error is', abs(res4 - exact4))
     print('The number of recursions was', globvar.ncalls)
     print('The depth of the recursion was', recmax4)
-    print('\n\n')
-    
-    # Initialization
-    a = np.NINF
-    b = np.PINF
-    exact5 = np.sqrt(np.pi)
-
-    globvar.ncalls = 0
-    print('Integrating exp(-x^2) from (x) =\n',a)
-    print('to (x) =\n', b)
-    res5, err5, recmax5 = integ.integ_recursive(f5, a, b, acc, eps) 
-    print('The integral is', res5)
-    print('The error on the integral is', err5)
-    print('The actual error is', abs(res5 - exact5))
-    print('The number of recursions was', globvar.ncalls)
-    print('The depth of the recursion was', recmax5)
     print('\n\n')
 amain()

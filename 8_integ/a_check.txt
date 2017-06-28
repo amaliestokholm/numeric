@@ -46,15 +46,3 @@ The depth of the recursion was 19
 
 
 
-Integrating 4 sqrt(1 - (1 -x)^2) from (x) =
- -inf
-to (x) =
- inf
-The integral is 1.77245362623
-The error on the integral is 5.16287805879e-08
-The actual error is 2.24671807825e-07
-The number of recursions was 2816
-The depth of the recursion was 11
-
-
-
