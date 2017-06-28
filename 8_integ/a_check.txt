@@ -1,7 +1,0 @@
-Integrating sqrt(x) from (x) =
- 0
-to (x) =
- 1
-The integral is  0.666629884672
-The error on the integral is  0.000849859944372
-The actual error is  3.6781995013e-05

@@ -40,17 +40,41 @@ def amain():
     Test of the routines for adaptive integration
     """
     # Initialization
-    acc = 1e-3
-    eps = 1e-3
-    a1 = 0
-    b1 = 1
+    acc = 1e-7
+    eps = 1e-7
+    a = 0
+    b = 1
     exact1 = 2 / 3
+    exact2 = 2
+    exact3 = -4
+    exact4 = np.pi
 
-    print('Integrating sqrt(x) from (x) =\n',a1)
-    print('to (x) =\n', b1)
-    res1, err1 = integ.integ_recursive(f1, a1, b1, acc, eps) 
-    print('The integral is ', res1)
-    print('The error on the integral is ', err1)
-    print('The actual error is ',abs(res1 - exact1))
+    print('Integrating sqrt(x) from (x) =\n',a)
+    print('to (x) =\n', b)
+    res1, err1 = integ.integ_recursive(f1, a, b, acc, eps) 
+    print('The integral is', res1)
+    print('The error on the integral is', err1)
+    print('The actual error is', abs(res1 - exact1))
+
+    print('Integrating 1 / sqrt(x) from (x) =\n',a)
+    print('to (x) =\n', b)
+    res2, err2 = integ.integ_recursive(f2, a, b, acc, eps) 
+    print('The integral is', res2)
+    print('The error on the integral is', err2)
+    print('The actual error is', abs(res2 - exact2))
+
+    #print('Integrating ln(x) / sqrt(x) from (x) =\n',a)
+    #print('to (x) =\n', b)
+    #res3, err3 = integ.integ_recursive(f3, a, b, acc, eps) 
+    #print('The integral is', res3)
+    #print('The error on the integral is', err3)
+    #print('The actual error is', abs(res3 - exact3))
+
+    print('Integrating 4 sqrt(1 - (1 -x)^2) from (x) =\n',a)
+    print('to (x) =\n', b)
+    res4, err4 = integ.integ_recursive(f4, a, b, acc, eps) 
+    print('The integral is', res4)
+    print('The error on the integral is', err4)
+    print('The actual error is', abs(res4 - exact4))
 
 amain()

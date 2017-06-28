@@ -17,7 +17,7 @@ def integ_recursive(F, a, b, acc=1e-4, eps=1e-4):
         - 'Q': The integral of F from a to b
         - 'err': An estimate of the error on Q
     """
-    assert a < b
+    assert a < b, 'Check your limits!'
 
     # Perform integration
     h = b - a
@@ -76,13 +76,14 @@ def quad_integrator(F, a, b, f1, f4, nrec, acc, eps):
     # If error is small, then divide the interval in three pieces
     # and integrate each section.
     else:
-        divide = np.sqrt(3)
-        Q1, err1 = quad_integrator(F, a, (a + h)/3., f1, f2, nrec+1,
-                                   (acc / divide), eps)
-        Qm, errm = quad_integrator(F, (a + h)/3., (a + 2 * h)/3.0, f2, f3, nrec+1,
-                                   (acc / divide), eps)
-        Qr, errr = quad_integrator(F, (a + 2 * h)/3.0, b, f3, f4, nrec+1,
-                                   (acc / divide), eps)
+        accsec = acc / np.sqrt(3)
+        sec = h / 3.0
+        Q1, err1 = quad_integrator(F, a, a + sec, f1, f2, nrec+1,
+                                   acc=accsec, eps=eps)
+        Qm, errm = quad_integrator(F, a + sec, a + (2 * sec), f2, f3, nrec+1,
+                                   acc=accsec, eps=eps)
+        Qr, errr = quad_integrator(F, a + (2 * sec), b, f3, f4, nrec+1,
+                                   acc=accsec, eps=eps)
         Qtot = Q1 + Qm + Qr
         errtot = np.sqrt(err1 * err1 + errm * errm + errr * errr)
         return Qtot, errtot

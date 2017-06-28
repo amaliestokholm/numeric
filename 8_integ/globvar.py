@@ -1,2 +1,2 @@
 ncalls = 0
-nrecmax = 25000 
+nrecmax = 15000 

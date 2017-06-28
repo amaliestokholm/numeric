@@ -1,0 +1,15 @@
+Integrating y * sin(x) from (x,y) =
+ [0 0]
+to (x,y) = 
+ [ 1.57079633  3.14159265]
+The sampling in points is 1000
+The integral is 4.74888742228
+The error on the integral is 0.121149393684
+Integrating (1 - cos(x) * cos(y) * cos(z))^{-1} from (x,y) =
+ [0 0 0]
+to (x,y) = 
+ [ 3.14159265  3.14159265  3.14159265]
+The sampling in points is 100000
+The integral is 1.41762119766
+The error on the integral is 0.0299053544851
+The actual error is 0.0244172679771
