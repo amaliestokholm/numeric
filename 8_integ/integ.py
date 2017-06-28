@@ -27,19 +27,17 @@ def integ_recursive(F, a_orig, b_orig, acc=1e-4, eps=1e-4):
     assert a_orig < b_orig, 'Check your limits!'
     # An infinite limit integral is converted by a variable transformation
     # to a finite limit integral
+    f = F
     if np.any(np.isinf([a_orig, b_orig])):
         if a_orig is np.NINF and b_orig is not np.PINF:
-            f = F
-            F = lambda t: f(b + (t / (1 + t))) * (1 / ((1 + t) ** 2))
+            F = lambda t: f(b_orig + (t / (1 + t))) * (1 / ((1 + t) ** 2))
             a = -1
             b = 0
         elif a_orig is not np.NINF and b_orig is np.PINF:
-            f = F
-            F = lambda t: f(a + (t / (1 - t))) * (1 / ((1 - t) ** 2))
+            F = lambda t: f(a_orig + (t / (1 - t))) * (1 / ((1 - t) ** 2))
             a = 0
             b = 1
         else:
-            f = F
             F = lambda t: f(t / (1 - t ** 2)) * ((1 + t ** 2) / (1 - t ** 2) ** 2)
             a = -1
             b = 1
