@@ -1,0 +1,23 @@
+Test of symmetric row/column update of a size-n symmetric
+eigenvalue problem
+The matrix to diagonalize is given in the form
+A = D + e(p)*u^T + u*e(p)^T
+where D is a diagonal matrix, which in this test is
+ [[ 0.77132064  0.          0.          0.        ]
+ [ 0.          0.02075195  0.          0.        ]
+ [ 0.          0.          0.63364823  0.        ]
+ [ 0.          0.          0.          0.74880388]]
+where u is a vector, which in this test is
+ [ 0.49850701  0.22479665  0.19806286  0.76053071]
+where e(p) is a unit vector in the direction p, where 1<=p<n.
+
+
+The eigenvalues found are
+ [ 0.76459656  0.135602    1.02977396  0.76459656]
+And the secular equation evaluated in the eigenvalues are
+ [  2.38816670e-13  -2.19796403e-13   0.00000000e+00   6.62030110e-14]
+
+
+The eigenvalues found by numpy are [ 1.82850505  0.76459656 -0.15805317  0.135602  ]
+The secular equation evaluated in the numpy eigenvalues are [  0.00000000e+00   1.45933612e-16   2.22044605e-16   1.38777878e-17]
+The difference between the two solutions are [ -2.93655164e-01  -6.28994570e-01  -1.45772283e-12   7.98731084e-01]

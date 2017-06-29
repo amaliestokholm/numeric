@@ -32,7 +32,7 @@ def update(D, u, p):
     x0 = np.zeros(n, dtype='float64')
     dx = np.zeros(n, dtype='float64')
     
-    # Assumtion
+    # Assumption
     D[p, p] += 2 * u[p]
     u[p] = 0 
 
@@ -45,7 +45,7 @@ def update(D, u, p):
         """
         The secular equation for a symmetric row/column update
         """
-        f = - (D[p, p] - l)
+        f = (- D[p, p] + l)
         for i in range(n):
             f *= (D[i, i] - l)
         for k in range(n):
@@ -54,8 +54,8 @@ def update(D, u, p):
                 for i in range(n):
                     if i != k:
                         t *= (D[i, i] - l)
-                f += t 
+                f += t
         return f
-    # l = scipy.optimize.fsolve(eveq, x0)
-    l = roots.newton(eveq, x0, dx)
+    l = scipy.optimize.fsolve(eveq, x0)
+    # l = roots.newton(eveq, x0, dx, eps=1e-10)
     return l, eveq

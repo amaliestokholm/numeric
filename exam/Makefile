@@ -19,7 +19,7 @@ plot.$(FORMAT) : a_check.txt
 	' | $(PLOTTER)
 
 a_check.txt : amain.py
-	python3 $< > $@ 2> aerr.txt
+	python3 $< > $@
 
 clean : 
 	rm -f a_check.txt plot.$(FORMAT)
