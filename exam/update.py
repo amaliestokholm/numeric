@@ -1,4 +1,11 @@
 import numpy as np
+import os
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '../5_roots/'))
+assert os.path.exists(sys.path[-1]), sys.path[-1]
+import root_finding as roots
+
+
 
 def update(D, u, p):
     """
@@ -22,7 +29,21 @@ def update(D, u, p):
     assert np.allclose(D, D.real), 'D is not real!'
 
     A = np.zeros((n, n), dtype='float64')
+    x0 = np.zeros(n, dtype='float64')
+    dx = np.zeros(n, dtype='float64')
 
+    # Fill
     for i in range(n):
-        A[p] = 
+        x0[i] = D[i, i]
+        dx[i] = u[i]
 
+    def eveq(l):
+        """
+        The secular equation for a symmetric row/column update
+        """
+        f =(D[p] - l)
+        for k in range(n):
+            if k != p:
+                f += (u[k] * u[k]) / (D[k] - l)
+        return f
+    l = roots.newton(eveq, x0, dx)
