@@ -43,34 +43,71 @@ def halton(n, d):
 
 def lattice(n, d):
     """
-    This function computes the lattice rules
+    This function computes the lattice rules.
+    Arguments:
+        - 'n': The index in the sequence
+        - 'd': Number of dimensions
+    Returns:
+        - 'xs': A vector containing the position in the d-dimensional unit cube
+    """
+    alpha = np.array([np.sqrt(13 * (i + 1)) % 1 for i in range(d)])
+    return np.array([(n * alpha[i]) % 1 for i in range(d)])
 
-def mc_quasi(F, a, b, N):
+
+def mc_quasi(F, a, b, N, sequence):
     """
     This routine is a Monte Carlo multi-dimensional integration using
     a quasi-random sampling.
+    Arguments:
+        - 'F': Function to integrate
+        - 'a': Starting point in a vector
+        - 'b': End point in a vector
+        - 'N': Number of points to sample
+        - 'sequence': Either 'lattice' or 'halton'
     """
+    assert sequence in (lattice, halton)
+
     # Initialization
     vol = 1
     x = np.zeros(a.shape, dtype='float64')
     sum = 0
-    sumsq = 0
 
     # Calculate volumne
     vol = np.product(b - a)
 
     # Calculate Halton sampling
     for i in range(N):
-        x = a + (b - a) * halton(i, len(a))
+        x = a + (b - a) * sequence(i, len(a))
         y = F(x)
         sum += y
 
-    # Calculate mean and variance
+    # Calculate mean
     mean = sum / N
 
     # Compute error and result
-    err = vol * sigma / np.sqrt(N)
     res = vol * mean
+    return res
+
+
+def mc_quasi_err(F, a, b, N):
+    """
+    This routine computes the Monte Carlo integral using two different methods.
+    Arguments:
+        - 'F': Function to integrate
+        - 'a': Starting point in a vector
+        - 'b': End point in a vector
+        - 'N': Number of points to sample
+    Returns:
+        - 'res': The mean of the result from both methods.
+        - 'err': The error estimated as the difference between the two results.
+    """
+    res_halton = mc_quasi(F, a, b, N, halton)
+    res_lattice = mc_quasi(F, a, b, N, lattice)
+
+    # Error is estimated as the difference between the two methods
+    err = abs(res_halton - res_lattice)
+
+    # The result is given as the mean of the two results
+    res = (res_halton + res_lattice) / 2
+
     return res, err
-
-
