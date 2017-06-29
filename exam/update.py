@@ -56,6 +56,6 @@ def update(D, u, p):
                         t *= (D[i, i] - l)
                 f += t 
         return f
-    l = scipy.optimize.fsolve(eveq, x0)
-    # l = roots.newton(eveq, x0, dx)
+    # l = scipy.optimize.fsolve(eveq, x0)
+    l = roots.newton(eveq, x0, dx)
     return l, eveq
