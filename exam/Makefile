@@ -1,7 +1,7 @@
 ECHO = echo
 FORMAT = pdf
 PLOTTER = gnuplot
-.PHONY: all check.txt nerror.$(FORMAT) main.py clean 
+.PHONY: all clean 
 
 all : nerror.$(FORMAT)
 
