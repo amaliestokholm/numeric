@@ -1,8 +1,9 @@
-Numerical Methods 2017 - Examination Assignment
+## Numerical Methods 2017 - Examination Assignment
+=================
 
-Author: Amalie Stokholm
+**Author:** Amalie Stokholm
 
-Project: 
+**Project:** 
 
 
 Exercise:
