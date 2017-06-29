@@ -6,7 +6,7 @@ Numerical Methods 2017 - Examination Assignment
 **Project:** 26. Multidimensional pseudo-random (plain Monte Carlo) vs quasi-random (Halton and/or lattice sequence) integrators.
 
 
-Exercise:
+Exercise
 ---------
 
 * Implement Halton and lattice sequence integrator
