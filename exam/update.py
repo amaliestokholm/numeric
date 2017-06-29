@@ -34,17 +34,27 @@ def update(D, u, p):
     # Fill
     for i in range(n):
         x0[i] = D[i, i]
-        dx[i] = u[i]
+    
+    dx = np.copy(u)
+
 
     def eveq(l):
         """
         The secular equation for a symmetric row/column update
         """
         f = - (D[p, p] - l)
+        for i in range(n):
+            f *= (D[i, i] - l)
         for k in range(n):
-            if k == p:
-                f += 0
-            else:
-                f += (u[k] * u[k]) / (D[k, k] - l)
+            if k != p:
+                t = u[k] * u[k]
+                for i in range(n):
+                    if i != k:
+                        t *= (D[i, i] - l)
+                f += t 
         return f
     l = roots.newton(eveq, x0, dx)
+    print(l)
+    for i in range(len(l)):
+        print(eveq(l[i]))
+    return l

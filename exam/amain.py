@@ -17,4 +17,10 @@ def amain():
     print(D)
     print(u)
     update.update(D, u, p)
+
+    A = np.copy(D)
+    A[p] = u
+    A[:, p] = u
+    A[p, p] = D[p, p] + u[p] ** 2
+    print(np.linalg.eig(A))
 amain()
