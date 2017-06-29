@@ -6,7 +6,6 @@ assert os.path.exists(sys.path[-1]), sys.path[-1]
 import root_finding as roots
 
 
-
 def update(D, u, p):
     """
     This routine computes the eigenvalues of the matrix A,
@@ -41,9 +40,11 @@ def update(D, u, p):
         """
         The secular equation for a symmetric row/column update
         """
-        f =(D[p] - l)
+        f = - (D[p, p] - l)
         for k in range(n):
-            if k != p:
-                f += (u[k] * u[k]) / (D[k] - l)
+            if k == p:
+                f += 0
+            else:
+                f += (u[k] * u[k]) / (D[k, k] - l)
         return f
     l = roots.newton(eveq, x0, dx)

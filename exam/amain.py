@@ -14,5 +14,7 @@ def amain():
     D = np.diag(diag)
     u = np.random.rand(n)
     p = 2
+    print(D)
+    print(u)
     update.update(D, u, p)
 amain()
