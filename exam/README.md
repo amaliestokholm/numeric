@@ -27,4 +27,6 @@ This project is implemented in Python3 with Gnuplot and Matplotlib used for plot
 
 
 **Output**
-
+* *nerror.pdf* contains a test of convergence (error as a function of sample size N) and shows that the quasi-random integrators improve the convergence rate of the pseudo-random.
+* *check.txt* contains the data plotted in nerror.pdf.
+* *plot_halton.png* and *plot_lattice.png* plot the distributions of the Halton and Lattice sequences respectively. These plots reproduce Figure 9.2 in the Lecture Notes quite nicely.
