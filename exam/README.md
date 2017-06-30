@@ -20,9 +20,9 @@ This project is implemented in Python3 with Gnuplot and Matplotlib used for plot
 
 **Overview of the files**
 * *Makefile* builds the project. The entire project can be built by running 'make', while 'make clean' will remove all output.
-* *main.py* contains the test of the implementation and it calls the different parts of the exercise. The implementation is tested using to different d-dimensional integrals: f(x, y) = x sin(y) and f(x, y, z) = 8xyz.
+* *main.py* contains the test of the implementation and it calls the different parts of the exercise. The implementation is tested using two different d-dimensional integrals: f(x, y) = x sin(y) and f(x, y, z) = 8xyz.
 * *mcquasi.py* contains the implementation of numerical integration using quasi-random integrators.
-* *plot_sequences.py* contains the implementation of plotting the different quasi-random sequences. This is done using Matplotlib instead of gnuplot just for fun.
+* *plot_sequences.py* contains the implementation of plotting the different quasi-random sequences. These plots are made using Matplotlib instead of gnuplot just for fun.
 * *../9_mcinteg/mcinteg.py* contains the implementation of numerical integration using a pseudo-random integrator.
 
 
